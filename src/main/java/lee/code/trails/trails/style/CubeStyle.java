@@ -9,14 +9,15 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class CubeStyle implements StyleInterface {
+  private final ConcurrentHashMap<UUID, AtomicDouble[]> angles = new ConcurrentHashMap<>();
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
-    final AtomicDouble horizontalAngle = new AtomicDouble(0);
-    final AtomicDouble verticalAngle = new AtomicDouble(0);
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
@@ -24,7 +25,7 @@ public class CubeStyle implements StyleInterface {
       }
       final Location playerLocation = player.getLocation().add(0, 1, 0);
       // Define the initial vertices of the cube
-      Location[] vertices = getVertices(playerLocation, 3);
+      Location[] vertices = getVertices(playerLocation);
 
       // Define the edges of the cube
       final int[][] edges = {
@@ -32,10 +33,10 @@ public class CubeStyle implements StyleInterface {
         {4, 5}, {5, 7}, {7, 6}, {6, 4}, // Bottom face
         {0, 4}, {1, 5}, {2, 6}, {3, 7}  // Vertical edges
       };
-
-      vertices = rotateVertices(vertices, playerLocation, horizontalAngle.get(), verticalAngle.get());
-      horizontalAngle.addAndGet(.02);
-      verticalAngle.addAndGet(.02);
+      final AtomicDouble[] angles = getAngles(player.getUniqueId());
+      vertices = rotateVertices(vertices, playerLocation, angles[0].get(), angles[1].get());
+      angles[0].addAndGet(.02);
+      angles[1].addAndGet(.02);
 
       // Spawn particles along each edge
       for (int[] edge : edges) {
@@ -44,6 +45,18 @@ public class CubeStyle implements StyleInterface {
         spawnLine(player, trailParticle, start, end);
       }
     },0, 200, TimeUnit.MILLISECONDS));
+  }
+
+  @Override
+  public void stop(Player player) {
+    angles.remove(player.getUniqueId());
+  }
+
+  private AtomicDouble[] getAngles(UUID uuid) {
+    if (!angles.containsKey(uuid)) {
+      angles.put(uuid, new AtomicDouble[]{new AtomicDouble(0), new AtomicDouble(0)});
+    }
+    return angles.get(uuid);
   }
 
   private void spawnLine(Player player, TrailParticle trailParticle, Location start, Location end) {
@@ -57,7 +70,8 @@ public class CubeStyle implements StyleInterface {
     }
   }
 
-  private Location[] getVertices(Location location, double size) {
+  private Location[] getVertices(Location location) {
+    final double size = 3;
     final double halfSize = size / 2.0;
 
     final Location[] vertices = new Location[8];

@@ -3,6 +3,7 @@ package lee.code.trails;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.trails.commands.TabCompletion;
 import lee.code.trails.commands.TrailsCMD;
+import lee.code.trails.listeners.QuitListener;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.TrailStyle;
 import lee.code.trails.trails.style.BlockBreakStyle;
@@ -36,6 +37,7 @@ public class Trails extends JavaPlugin {
 
   private void registerListeners() {
     getServer().getPluginManager().registerEvents((BlockBreakStyle) TrailStyle.BLOCK_BREAK.getStyle(), this);
+    getServer().getPluginManager().registerEvents(new QuitListener(this), this);
   }
 
   private void loadCommodoreData() {
