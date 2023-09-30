@@ -13,6 +13,7 @@ public enum TrailStyle {
   CUBE(new CubeStyle()),
   PROJECTILE(new ProjectileStyle()),
   GROUND_SPIRAL(new GroundSpiralStyle()),
+  FORCE_FIELD(new ForceFieldStyle()),
 
   ;
 
