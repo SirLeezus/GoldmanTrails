@@ -1,0 +1,94 @@
+plugins {
+  id 'java'
+  id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'lee.code.trails'
+version '1.0.0'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven {
+    name = "paper-repo"
+    url = "https://repo.papermc.io/repository/maven-public/"
+  }
+  maven {
+    name = "mojang-libraries"
+    url = "https://libraries.minecraft.net"
+  }
+}
+
+artifacts {
+  archives shadowJar
+}
+
+dependencies {
+  //lombok
+  compileOnly 'org.projectlombok:lombok:1.18.28'
+  annotationProcessor 'org.projectlombok:lombok:1.18.28'
+  testCompileOnly 'org.projectlombok:lombok:1.18.28'
+  testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+  //paper
+  compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
+  compileOnly 'com.mojang:authlib:1.5.25'
+
+  //ormlite
+  implementation 'com.j256.ormlite:ormlite-core:6.1'
+  implementation 'com.j256.ormlite:ormlite-jdbc:6.1'
+
+  //commodore
+  implementation 'me.lucko:commodore:2.2'
+  implementation 'me.lucko:commodore-file:1.0'
+
+  //goldman playerdata
+  compileOnly 'lee.code.playerdata:playerdata:1.0.0'
+}
+
+shadowJar {
+  // Set the name of the main JAR
+  archiveFileName = "${project.name}-${project.version}.jar"
+
+  // Configure the dependencies to be included in the main JAR
+  dependencies {
+    include(dependency('com.j256.ormlite:ormlite-core:6.1'))
+    include(dependency('com.j256.ormlite:ormlite-jdbc:6.1'))
+    include(dependency('me.lucko:commodore:2.2'))
+    include(dependency('me.lucko:commodore-file:1.0'))
+    exclude(dependency('com.mojang:brigadier'))
+  }
+
+  relocate 'com.j256.ormlite', 'lee.code.central.ormlite'
+  relocate 'me.lucko.commodore', 'lee.code.central.commodore'
+  relocate 'me.lucko.commodore-file', 'lee.code.central.commodore-file'
+}
+
+
+def targetJavaVersion = 17
+java {
+  def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+  sourceCompatibility = javaVersion
+  targetCompatibility = javaVersion
+  if (JavaVersion.current() < javaVersion) {
+    toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+    options.release = targetJavaVersion
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  options.encoding = "UTF-8"
+}
+
+processResources {
+  def props = [version: version]
+  inputs.properties props
+  filesMatching('plugin.yml') {
+    expand props
+  }
+}

@@ -1,0 +1,13 @@
+name: GoldmanTrails
+version: ${version}
+main: lee.code.trails.Trails
+api-version: 1.20
+author: Lee
+folia-supported: true
+depend: [GoldmanPlayerData]
+commands:
+  trails:
+    description: Open your trail menu.
+    permission: trails.command.trails
+    aliases: [trail]
+    usage: "/trails"
