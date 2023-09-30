@@ -26,8 +26,10 @@ public class TrailManager {
   }
 
   public void stopTrail(Player player) {
-    if (activeTrailTasks.get(player.getUniqueId()) != null) activeTrailTasks.get(player.getUniqueId()).cancel();
-    activeTrailTasks.remove(player.getUniqueId());
+    if (activeTrailTasks.containsKey(player.getUniqueId())) {
+      activeTrailTasks.get(player.getUniqueId()).cancel();
+      activeTrailTasks.remove(player.getUniqueId());
+    }
     movementManager.stopTracking(player.getUniqueId());
     activeTrails.get(player.getUniqueId()).getStyle().stop(player);
   }
