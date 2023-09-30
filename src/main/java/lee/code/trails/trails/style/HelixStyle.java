@@ -13,7 +13,7 @@ public class HelixStyle implements StyleInterface {
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
-    trailManager.setActiveTrail(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
+    trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
         return;

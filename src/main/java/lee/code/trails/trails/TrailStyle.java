@@ -1,9 +1,6 @@
 package lee.code.trails.trails;
 
-import lee.code.trails.trails.style.HaloStyle;
-import lee.code.trails.trails.style.HelixStyle;
-import lee.code.trails.trails.style.SphereStyle;
-import lee.code.trails.trails.style.SpinningHelixStyle;
+import lee.code.trails.trails.style.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,6 +10,7 @@ public enum TrailStyle {
   SPINNING_HELIX(new SpinningHelixStyle()),
   HALO(new HaloStyle()),
   SPHERE(new SphereStyle()),
+  BLOCK_BREAK(new BlockBreakStyle()),
 
   ;
 

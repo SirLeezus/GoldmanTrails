@@ -4,6 +4,8 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.trails.commands.TabCompletion;
 import lee.code.trails.commands.TrailsCMD;
 import lee.code.trails.trails.TrailManager;
+import lee.code.trails.trails.TrailStyle;
+import lee.code.trails.trails.style.BlockBreakStyle;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
 import me.lucko.commodore.file.CommodoreFileReader;
@@ -18,6 +20,7 @@ public class Trails extends JavaPlugin {
   public void onEnable() {
     this.trailManager = new TrailManager(this);
     registerCommands();
+    registerListeners();
   }
 
   @Override
@@ -32,7 +35,7 @@ public class Trails extends JavaPlugin {
   }
 
   private void registerListeners() {
-
+    getServer().getPluginManager().registerEvents((BlockBreakStyle) TrailStyle.BLOCK_BREAK.getStyle(), this);
   }
 
   private void loadCommodoreData() {

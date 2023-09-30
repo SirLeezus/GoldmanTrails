@@ -11,7 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TrailManager {
   @Getter private final Trails trails;
   @Getter private final MovementManager movementManager;
-  private final ConcurrentHashMap<UUID, ScheduledTask> activeTrails = new ConcurrentHashMap<>();
+  private final ConcurrentHashMap<UUID, ScheduledTask> activeTrailTasks = new ConcurrentHashMap<>();
+  private final ConcurrentHashMap<UUID, TrailStyle> activeTrails = new ConcurrentHashMap<>();
 
   public TrailManager(Trails trails) {
     this.trails = trails;
@@ -20,17 +21,19 @@ public class TrailManager {
 
   public void startTrail(Player player, TrailParticle trailParticle, TrailStyle trailStyle) {
     movementManager.startTracking(trails, player.getUniqueId());
+    activeTrails.put(player.getUniqueId(), trailStyle);
     trailStyle.getStyle().start(this, player, trailParticle);
   }
 
   public void stopTrail(Player player) {
-    activeTrails.get(player.getUniqueId()).cancel();
-    activeTrails.remove(player.getUniqueId());
+    if (activeTrailTasks.get(player.getUniqueId()) != null) activeTrailTasks.get(player.getUniqueId()).cancel();
+    activeTrailTasks.remove(player.getUniqueId());
     movementManager.stopTracking(player.getUniqueId());
+    activeTrails.get(player.getUniqueId()).getStyle().stop(player);
   }
 
-  public void setActiveTrail(UUID uuid, ScheduledTask scheduledTask) {
-    activeTrails.put(uuid, scheduledTask);
+  public void setActiveTrailTask(UUID uuid, ScheduledTask scheduledTask) {
+    activeTrailTasks.put(uuid, scheduledTask);
   }
 
   public boolean hasActiveTrail(UUID uuid) {

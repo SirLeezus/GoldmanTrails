@@ -2,6 +2,7 @@ package lee.code.trails.commands;
 
 import lee.code.trails.Lang;
 import lee.code.trails.Trails;
+import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.TrailParticle;
 import lee.code.trails.trails.TrailStyle;
 import org.bukkit.command.Command;
@@ -23,7 +24,9 @@ public class TrailsCMD implements CommandExecutor {
       sender.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NOT_CONSOLE_COMMAND.getComponent(null)));
       return true;
     }
-    trails.getTrailManager().startTrail(player, TrailParticle.END_ROD, TrailStyle.SPHERE);
+    final TrailManager trailManager = trails.getTrailManager();
+    if (trailManager.hasActiveTrail(player.getUniqueId())) trailManager.stopTrail(player);
+    else trails.getTrailManager().startTrail(player, TrailParticle.END_ROD, TrailStyle.STAR);
     return true;
   }
 }
