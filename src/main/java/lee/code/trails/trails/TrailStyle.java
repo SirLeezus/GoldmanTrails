@@ -12,6 +12,7 @@ public enum TrailStyle {
   BLOCK_BREAK(new BlockBreakStyle()),
   CUBE(new CubeStyle()),
   PROJECTILE(new ProjectileStyle()),
+  GROUND_SPIRAL(new GroundSpiralStyle()),
 
   ;
 
