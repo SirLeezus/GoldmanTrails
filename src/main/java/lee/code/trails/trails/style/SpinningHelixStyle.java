@@ -17,7 +17,7 @@ public class SpinningHelixStyle implements StyleInterface {
     final AtomicDouble phi = new AtomicDouble(0);
     trailManager.setActiveTrail(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-        trailParticle.spawnParticle(player, player.getLocation());
+        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
         return;
       }
       double x, y, z;
