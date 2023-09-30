@@ -13,15 +13,15 @@ public class HaloStyle implements StyleInterface {
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+    final double radius = 0.5;
+    final int numParticles = 20;
+    final double angleIncrement = 2 * Math.PI / numParticles;
+
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
         return;
       }
-      final double radius = 0.5;
-      final int numParticles = 20;
-      final double angleIncrement = 2 * Math.PI / numParticles;
-
       final Location playerLocation = player.getLocation().add(0, 2.2, 0);
 
       for (int i = 0; i < numParticles; i++) {

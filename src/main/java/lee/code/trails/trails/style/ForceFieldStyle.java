@@ -13,15 +13,15 @@ public class ForceFieldStyle implements StyleInterface {
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+    final double radius = 0.8;
+    final int numParticles = 20;
+    final double angleIncrement = 2 * Math.PI / numParticles;
+
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
         return;
       }
-      final double radius = 0.8;
-      final int numParticles = 20;
-      final double angleIncrement = 2 * Math.PI / numParticles;
-
       final Location playerLocation = player.getLocation().clone().add(0, 1, 0);
       final double yOffset = Math.sin(System.currentTimeMillis() * 0.001) * 1; // Adjust the speed and range of up and down motion here.
       playerLocation.setY(playerLocation.getY() + yOffset);

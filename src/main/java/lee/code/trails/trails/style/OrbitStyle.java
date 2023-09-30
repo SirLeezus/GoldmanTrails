@@ -13,15 +13,15 @@ public class OrbitStyle implements StyleInterface {
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+    final int numPoints = 3; // Number of orbiting points.
+    final double orbitRadius = 1.0; // Radius of the orbit.
+    final double orbitSpeed = 0.02; // Speed of rotation.
+
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
         return;
       }
-      final int numPoints = 3; // Number of orbiting points.
-      final double orbitRadius = 1.0; // Radius of the orbit.
-      final double orbitSpeed = 0.02; // Speed of rotation.
-
       final Location playerLocation = player.getLocation().add(0, 1, 0);
       final double angleIncrement = 2 * Math.PI / numPoints;
 

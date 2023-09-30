@@ -13,14 +13,13 @@ public class SphereStyle implements StyleInterface {
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+    final double radius = 2; // Adjust the radius of the sphere as needed
+    final int numParticles = 100; // Number of particles in the sphere
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
         return;
       }
-      final double radius = 2; // Adjust the radius of the sphere as needed
-      final int numParticles = 100; // Number of particles in the sphere
-
       final Location playerLocation = player.getLocation().add(0, 1, 0);
 
       for (int i = 0; i < numParticles; i++) {
