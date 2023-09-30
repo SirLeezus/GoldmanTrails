@@ -11,6 +11,7 @@ public enum TrailStyle {
   HALO(new HaloStyle()),
   SPHERE(new SphereStyle()),
   BLOCK_BREAK(new BlockBreakStyle()),
+  CUBE(new CubeStyle()),
 
   ;
 

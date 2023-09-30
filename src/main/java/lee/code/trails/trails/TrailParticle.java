@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 public enum TrailParticle {
   HAPPY_VILLAGER(Particle.VILLAGER_HAPPY),
   END_ROD(Particle.END_ROD),
+  FLAME(Particle.FLAME),
   ;
 
   private final Particle particle;
