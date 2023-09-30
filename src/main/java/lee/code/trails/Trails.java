@@ -7,6 +7,7 @@ import lee.code.trails.listeners.QuitListener;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.TrailStyle;
 import lee.code.trails.trails.style.BlockBreakStyle;
+import lee.code.trails.trails.style.ProjectileStyle;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
 import me.lucko.commodore.file.CommodoreFileReader;
@@ -37,6 +38,7 @@ public class Trails extends JavaPlugin {
 
   private void registerListeners() {
     getServer().getPluginManager().registerEvents((BlockBreakStyle) TrailStyle.BLOCK_BREAK.getStyle(), this);
+    getServer().getPluginManager().registerEvents((ProjectileStyle) TrailStyle.PROJECTILE.getStyle(), this);
     getServer().getPluginManager().registerEvents(new QuitListener(this), this);
   }
 

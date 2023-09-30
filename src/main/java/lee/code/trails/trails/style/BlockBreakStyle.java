@@ -19,7 +19,7 @@ public class BlockBreakStyle implements StyleInterface, Listener {
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
-    this.trailManager = trailManager;
+    if (this.trailManager == null) this.trailManager = trailManager;
     players.put(player.getUniqueId(), trailParticle);
   }
 
@@ -31,7 +31,7 @@ public class BlockBreakStyle implements StyleInterface, Listener {
   @EventHandler
   public void onTrailBlockBreak(BlockBreakEvent e) {
     if (!players.containsKey(e.getPlayer().getUniqueId())) return;
-    Bukkit.getScheduler().runTaskAsynchronously(trailManager.getTrails(), () -> {
+    Bukkit.getAsyncScheduler().runNow(trailManager.getTrails(), scheduledTask -> {
       final double radius = 0.5;
       final double maxYOffset = 1; // Adjust this value to control the height of particles
       final int numParticles = 25;
