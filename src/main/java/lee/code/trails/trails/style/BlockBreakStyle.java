@@ -31,15 +31,18 @@ public class BlockBreakStyle implements StyleInterface, Listener {
   @EventHandler
   public void onTrailBlockBreak(BlockBreakEvent e) {
     if (!players.containsKey(e.getPlayer().getUniqueId())) return;
-    Bukkit.getAsyncScheduler().runNow(trailManager.getTrails(), scheduledTask -> {
-      final double radius = 1;
-      final int numParticles = 20;
+    Bukkit.getScheduler().runTaskAsynchronously(trailManager.getTrails(), () -> {
+      final double radius = 0.5;
+      final double maxYOffset = 1; // Adjust this value to control the height of particles
+      final int numParticles = 25;
+      final Location blockLocation = e.getBlock().getLocation().add(0.5, 0.0, 0.5); // Center of the block with no vertical offset
+
       for (int i = 0; i < numParticles; i++) {
         final double randomX = (Math.random() * 2 - 1) * radius;
-        final double randomY = Math.random() * radius;
+        final double randomY = Math.random() * maxYOffset; // Limited height range
         final double randomZ = (Math.random() * 2 - 1) * radius;
 
-        final Location particleLocation = e.getBlock().getLocation().clone().add(randomX, randomY, randomZ);
+        final Location particleLocation = blockLocation.clone().add(randomX, randomY, randomZ);
         players.get(e.getPlayer().getUniqueId()).spawnParticle(e.getPlayer(), particleLocation);
       }
     });

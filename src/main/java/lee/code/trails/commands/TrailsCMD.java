@@ -26,7 +26,7 @@ public class TrailsCMD implements CommandExecutor {
     }
     final TrailManager trailManager = trails.getTrailManager();
     if (trailManager.hasActiveTrail(player.getUniqueId())) trailManager.stopTrail(player);
-    else trails.getTrailManager().startTrail(player, TrailParticle.END_ROD, TrailStyle.STAR);
+    else trails.getTrailManager().startTrail(player, TrailParticle.END_ROD, TrailStyle.BLOCK_BREAK);
     return true;
   }
 }
