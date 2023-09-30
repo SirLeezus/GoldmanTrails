@@ -49,7 +49,7 @@ public class GroundSpiralStyle implements StyleInterface {
     for (double t = 0; t <= 2 * Math.PI; t += Math.PI / 16) {
       for (double i = 0; i <= 1; i += 1) {
         x = scale * 0.4 * (2 * Math.PI - t) * 0.5 * Math.cos(t + phi.get() + i * Math.PI);
-        y = 0.2; // Adjust this value to control the height of the spiral below the player
+        y = 0.1; // Adjust this value to control the height of the spiral below the player
         z = scale * 0.4 * (2 * Math.PI - t) * 0.5 * Math.sin(t + phi.get() + i * Math.PI);
         loc.add(x, y, z);
         trailParticle.spawnParticle(player, loc);
