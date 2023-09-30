@@ -7,7 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum TrailStyle {
   HELIX(new HelixStyle()),
-  SPINNING_HELIX(new SpinningHelixStyle()),
   HALO(new HaloStyle()),
   SPHERE(new SphereStyle()),
   BLOCK_BREAK(new BlockBreakStyle()),
