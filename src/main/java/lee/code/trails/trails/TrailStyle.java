@@ -17,6 +17,7 @@ public enum TrailStyle {
   ORBIT(new OrbitStyle()),
   PULSE(new PulseStyle()),
   NORMAL(new NormalStyle()),
+  THICK(new ThickStyle()),
   ;
 
   @Getter private final StyleInterface style;
