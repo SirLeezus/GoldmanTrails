@@ -19,6 +19,7 @@ public enum TrailStyle {
   NORMAL(new NormalStyle()),
   THICK(new ThickStyle()),
   HEART(new HeartStyle()),
+  BLOCK_PLACE(new BlockPlaceStyle()),
   ;
 
   @Getter private final StyleInterface style;
