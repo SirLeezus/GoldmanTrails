@@ -16,7 +16,7 @@ public enum TrailStyle {
   FORCE_FIELD(new ForceFieldStyle()),
   ORBIT(new OrbitStyle()),
   PULSE(new PulseStyle()),
-
+  NORMAL(new NormalStyle()),
   ;
 
   @Getter private final StyleInterface style;
