@@ -20,7 +20,7 @@ public enum TrailStyle {
   THICK(new ThickStyle()),
   HEART(new HeartStyle()),
   BLOCK_PLACE(new BlockPlaceStyle()),
-  DAMAGE_STYLE(new DamageStyle()),
+  DAMAGE(new DamageStyle()),
   ;
 
   @Getter private final StyleInterface style;

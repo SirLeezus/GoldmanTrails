@@ -42,7 +42,7 @@ public class Trails extends JavaPlugin {
     getServer().getPluginManager().registerEvents((BlockBreakStyle) TrailStyle.BLOCK_BREAK.getStyle(), this);
     getServer().getPluginManager().registerEvents((ProjectileStyle) TrailStyle.PROJECTILE.getStyle(), this);
     getServer().getPluginManager().registerEvents((BlockPlaceStyle) TrailStyle.BLOCK_PLACE.getStyle(), this);
-    getServer().getPluginManager().registerEvents((DamageStyle) TrailStyle.DAMAGE_STYLE.getStyle(), this);
+    getServer().getPluginManager().registerEvents((DamageStyle) TrailStyle.DAMAGE.getStyle(), this);
     getServer().getPluginManager().registerEvents(new QuitListener(this), this);
   }
 
