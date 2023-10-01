@@ -34,8 +34,8 @@ public class CubeStyle implements StyleInterface {
 
       final AtomicDouble[] angles = getAngles(player.getUniqueId());
       vertices = rotateVertices(vertices, playerLocation, angles[0].get(), angles[1].get());
-      angles[0].addAndGet(.02);
-      angles[1].addAndGet(.02);
+      angles[0].addAndGet(.01);
+      angles[1].addAndGet(.01);
 
       // Spawn particles along each edge
       for (int[] edge : edges) {
