@@ -12,6 +12,7 @@ public enum TrailParticle {
   FLAME(Particle.FLAME),
   TOTEM(Particle.TOTEM),
   WAX_ON(Particle.WAX_ON),
+  HEART(Particle.HEART),
   ;
 
   private final Particle particle;

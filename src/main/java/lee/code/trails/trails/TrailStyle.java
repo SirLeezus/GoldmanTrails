@@ -18,6 +18,7 @@ public enum TrailStyle {
   PULSE(new PulseStyle()),
   NORMAL(new NormalStyle()),
   THICK(new ThickStyle()),
+  HEART(new HeartStyle()),
   ;
 
   @Getter private final StyleInterface style;
