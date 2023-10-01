@@ -10,13 +10,12 @@ import org.bukkit.entity.Player;
 import java.util.concurrent.TimeUnit;
 
 public class OrbitStyle implements StyleInterface {
+  private final int numPoints = 3;
+  private final double orbitRadius = 1.0;
+  private final double orbitSpeed = 0.02;
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
-    final int numPoints = 3; // Number of orbiting points.
-    final double orbitRadius = 1.0; // Radius of the orbit.
-    final double orbitSpeed = 0.02; // Speed of rotation.
-
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));

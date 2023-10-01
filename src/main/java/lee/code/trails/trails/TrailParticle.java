@@ -10,6 +10,8 @@ public enum TrailParticle {
   HAPPY_VILLAGER(Particle.VILLAGER_HAPPY),
   END_ROD(Particle.END_ROD),
   FLAME(Particle.FLAME),
+  TOTEM(Particle.TOTEM),
+  WAX_ON(Particle.WAX_ON),
   ;
 
   private final Particle particle;

@@ -10,13 +10,12 @@ import org.bukkit.entity.Player;
 import java.util.concurrent.TimeUnit;
 
 public class HaloStyle implements StyleInterface {
+  private final double radius = 0.5;
+  private final int numParticles = 20;
+  private final double angleIncrement = 2 * Math.PI / numParticles;
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
-    final double radius = 0.5;
-    final int numParticles = 20;
-    final double angleIncrement = 2 * Math.PI / numParticles;
-
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));

@@ -36,13 +36,10 @@ public class GroundSpiralStyle implements StyleInterface {
   }
 
   private AtomicDouble getPhi(UUID uuid) {
-    if (!phi.containsKey(uuid)) {
-      phi.put(uuid, new AtomicDouble(0));
-    }
+    if (!phi.containsKey(uuid)) phi.put(uuid, new AtomicDouble(0));
     return phi.get(uuid);
   }
 
-  // Method to spawn a 1D spiral below the player
   private void spawnSpiralBelowPlayer(Player player, Location loc, TrailParticle trailParticle, AtomicDouble phi) {
     final int scale = 3;
     double x, y, z;

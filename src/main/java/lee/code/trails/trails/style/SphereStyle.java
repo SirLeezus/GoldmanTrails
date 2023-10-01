@@ -10,11 +10,11 @@ import org.bukkit.entity.Player;
 import java.util.concurrent.TimeUnit;
 
 public class SphereStyle implements StyleInterface {
+  private final double radius = 2;
+  private final int numParticles = 100;
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
-    final double radius = 2; // Adjust the radius of the sphere as needed
-    final int numParticles = 100; // Number of particles in the sphere
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));

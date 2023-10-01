@@ -15,6 +15,11 @@ import java.util.concurrent.TimeUnit;
 
 public class CubeStyle implements StyleInterface {
   private final ConcurrentHashMap<UUID, AtomicDouble[]> angles = new ConcurrentHashMap<>();
+  private final int[][] edges = {
+    {0, 1}, {1, 3}, {3, 2}, {2, 0}, // Top face
+    {4, 5}, {5, 7}, {7, 6}, {6, 4}, // Bottom face
+    {0, 4}, {1, 5}, {2, 6}, {3, 7}  // Vertical edges
+  };
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
@@ -27,12 +32,6 @@ public class CubeStyle implements StyleInterface {
       // Define the initial vertices of the cube
       Location[] vertices = getVertices(playerLocation);
 
-      // Define the edges of the cube
-      final int[][] edges = {
-        {0, 1}, {1, 3}, {3, 2}, {2, 0}, // Top face
-        {4, 5}, {5, 7}, {7, 6}, {6, 4}, // Bottom face
-        {0, 4}, {1, 5}, {2, 6}, {3, 7}  // Vertical edges
-      };
       final AtomicDouble[] angles = getAngles(player.getUniqueId());
       vertices = rotateVertices(vertices, playerLocation, angles[0].get(), angles[1].get());
       angles[0].addAndGet(.02);

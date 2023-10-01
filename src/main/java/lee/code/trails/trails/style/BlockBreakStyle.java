@@ -16,6 +16,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BlockBreakStyle implements StyleInterface, Listener {
   private TrailManager trailManager;
   private final ConcurrentHashMap<UUID, TrailParticle> players = new ConcurrentHashMap<>();
+  private final double radius = 0.5;
+  private final double maxYOffset = 1;
+  private final int numParticles = 25;
 
   @Override
   public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
@@ -32,9 +35,6 @@ public class BlockBreakStyle implements StyleInterface, Listener {
   public void onTrailBlockBreak(BlockBreakEvent e) {
     if (!players.containsKey(e.getPlayer().getUniqueId())) return;
     Bukkit.getAsyncScheduler().runNow(trailManager.getTrails(), scheduledTask -> {
-      final double radius = 0.5;
-      final double maxYOffset = 1; // Adjust this value to control the height of particles
-      final int numParticles = 25;
       final Location blockLocation = e.getBlock().getLocation().add(0.5, 0.0, 0.5); // Center of the block with no vertical offset
 
       for (int i = 0; i < numParticles; i++) {
