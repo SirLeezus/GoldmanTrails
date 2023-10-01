@@ -15,7 +15,7 @@ public enum TrailStyle {
   GROUND_SPIRAL(new GroundSpiralStyle()),
   FORCE_FIELD(new ForceFieldStyle()),
   ORBIT(new OrbitStyle()),
-  PULSE(new PulseStyle())
+  PULSE(new PulseStyle()),
 
   ;
 
