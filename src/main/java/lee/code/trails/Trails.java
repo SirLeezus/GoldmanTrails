@@ -8,6 +8,7 @@ import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.TrailStyle;
 import lee.code.trails.trails.style.BlockBreakStyle;
 import lee.code.trails.trails.style.BlockPlaceStyle;
+import lee.code.trails.trails.style.DamageStyle;
 import lee.code.trails.trails.style.ProjectileStyle;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
@@ -41,6 +42,7 @@ public class Trails extends JavaPlugin {
     getServer().getPluginManager().registerEvents((BlockBreakStyle) TrailStyle.BLOCK_BREAK.getStyle(), this);
     getServer().getPluginManager().registerEvents((ProjectileStyle) TrailStyle.PROJECTILE.getStyle(), this);
     getServer().getPluginManager().registerEvents((BlockPlaceStyle) TrailStyle.BLOCK_PLACE.getStyle(), this);
+    getServer().getPluginManager().registerEvents((DamageStyle) TrailStyle.DAMAGE_STYLE.getStyle(), this);
     getServer().getPluginManager().registerEvents(new QuitListener(this), this);
   }
 
