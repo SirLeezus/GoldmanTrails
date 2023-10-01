@@ -10,6 +10,7 @@ import lee.code.trails.trails.style.BlockBreakStyle;
 import lee.code.trails.trails.style.BlockPlaceStyle;
 import lee.code.trails.trails.style.DamageStyle;
 import lee.code.trails.trails.style.ProjectileStyle;
+import lee.code.trails.utils.RainbowUtil;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
 import me.lucko.commodore.file.CommodoreFileReader;
@@ -19,6 +20,7 @@ import java.io.IOException;
 
 public class Trails extends JavaPlugin {
   @Getter private TrailManager trailManager;
+  @Getter private RainbowUtil rainbowUtil;
 
   @Override
   public void onEnable() {
