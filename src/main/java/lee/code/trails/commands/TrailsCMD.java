@@ -27,7 +27,7 @@ public class TrailsCMD implements CommandExecutor {
     }
     final TrailManager trailManager = trails.getTrailManager();
     if (trailManager.hasActiveTrail(player.getUniqueId())) trailManager.stopTrail(player);
-    else trails.getTrailManager().startTrail(player, TrailParticle.FALLING_DUST, TrailStyle.HELIX, new String[]{Material.BEEHIVE.name()});
+    else trails.getTrailManager().startTrail(player, TrailParticle.SPELL_INSTANT, TrailStyle.HELIX, new String[]{"102", "0", "102"});
     return true;
   }
 }

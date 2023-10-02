@@ -4,10 +4,7 @@ import com.destroystokyo.paper.ParticleBuilder;
 import lee.code.trails.utils.CoreUtil;
 import lee.code.trails.utils.RainbowUtil;
 import lombok.AllArgsConstructor;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -59,7 +56,6 @@ public enum TrailParticle {
   SPELL_MOB(Particle.SPELL_MOB),
   SPELL_INSTANT(Particle.SPELL_INSTANT),
   SPELL_WITCH(Particle.SPELL_WITCH),
-  SPELL_MOB_AMBIENT(Particle.SPELL_MOB_AMBIENT),
   SPIT(Particle.SPIT),
   SQUID_INK(Particle.SQUID_INK),
   WHITE_ASH(Particle.WHITE_ASH),
@@ -78,6 +74,7 @@ public enum TrailParticle {
       case RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1,  new Particle.DustOptions(RainbowUtil.getNextColor(player.getUniqueId()), 1));
       case REDSTONE -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])), 1));
       case FALLING_DUST -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, Material.valueOf(data[0]).createBlockData());
+      case SPELL_MOB -> player.getWorld().spawnParticle(particle, location, 0, Integer.parseInt(data[0]) / 255D, Integer.parseInt(data[1]) / 255D, Integer.parseInt(data[2]) / 255D, 1);
       default -> player.getWorld().spawnParticle(particle, location, 0);
     }
   }
