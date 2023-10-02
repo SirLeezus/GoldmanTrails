@@ -64,6 +64,7 @@ public enum TrailParticle {
   VILLAGER_ANGRY(Particle.VILLAGER_ANGRY),
   TOWN_AURA(Particle.TOWN_AURA),
   FALLING_DUST(Particle.FALLING_DUST),
+  BLOCK_CRACK(Particle.BLOCK_CRACK),
   ;
 
   private final Particle particle;
@@ -73,7 +74,7 @@ public enum TrailParticle {
       case NOTE -> player.getWorld().spawnParticle(particle, location, 0, CoreUtil.getRandomNoteColor() / 24.0, 0, 0, 1);
       case RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1,  new Particle.DustOptions(RainbowUtil.getNextColor(player.getUniqueId()), 1));
       case REDSTONE -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])), 1));
-      case FALLING_DUST -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, Material.valueOf(data[0]).createBlockData());
+      case FALLING_DUST, BLOCK_CRACK -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, Material.valueOf(data[0]).createBlockData());
       case SPELL_MOB -> player.getWorld().spawnParticle(particle, location, 0, Integer.parseInt(data[0]) / 255D, Integer.parseInt(data[1]) / 255D, Integer.parseInt(data[2]) / 255D, 1);
       default -> player.getWorld().spawnParticle(particle, location, 0);
     }
