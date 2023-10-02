@@ -1,5 +1,6 @@
 package lee.code.trails.trails;
 
+import lee.code.trails.utils.CoreUtil;
 import lee.code.trails.utils.RainbowUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.Color;
@@ -20,14 +21,38 @@ public enum TrailParticle {
   SOUL_FIRE_FLAME(Particle.SOUL_FIRE_FLAME),
   REDSTONE(Particle.REDSTONE),
   RAINBOW(Particle.REDSTONE),
-
+  ELECTRIC_SPARK(Particle.ELECTRIC_SPARK),
+  BUBBLE_POP(Particle.BUBBLE_POP),
+  CAMPFIRE_COSY_SMOKE(Particle.CAMPFIRE_COSY_SMOKE),
+  CLOUD(Particle.CLOUD),
+  CRIMSON_SPORE(Particle.CRIMSON_SPORE),
+  CRIT(Particle.CRIT),
+  CRIT_MAGIC(Particle.CRIT_MAGIC),
+  DAMAGE_INDICATOR(Particle.DAMAGE_INDICATOR),
+  DOLPHIN(Particle.DOLPHIN),
+  DRAGON_BREATH(Particle.DRAGON_BREATH),
+  DRIP_LAVA(Particle.DRIP_LAVA),
+  DRIP_WATER(Particle.DRIP_WATER),
+  DRIPPING_OBSIDIAN_TEAR(Particle.DRIPPING_OBSIDIAN_TEAR),
+  FALLING_SPORE_BLOSSOM(Particle.FALLING_SPORE_BLOSSOM),
+  WATER_DROP(Particle.WATER_DROP),
+  ENCHANTMENT_TABLE(Particle.ENCHANTMENT_TABLE),
+  FIREWORKS_SPARK(Particle.FIREWORKS_SPARK),
+  GLOW(Particle.GLOW),
+  GLOW_SQUID_INK(Particle.GLOW_SQUID_INK),
+  LAVA(Particle.LAVA),
+  NAUTILUS(Particle.NAUTILUS),
+  NOTE(Particle.NOTE),
   ;
 
   private final Particle particle;
 
   public void spawnParticle(Player player, Location location) {
-    if (this.equals(RAINBOW)) player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1,  new Particle.DustOptions(RainbowUtil.getNextColor(player.getUniqueId()), 1));
-    else if (this.equals(REDSTONE)) player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.RED, 1));
-    else player.getWorld().spawnParticle(particle, location, 0);
+    switch (this) {
+      case NOTE -> player.getWorld().spawnParticle(particle, location, 0, CoreUtil.getRandomNoteColor() / 24.0, 0, 0, 1);
+      case RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1,  new Particle.DustOptions(RainbowUtil.getNextColor(player.getUniqueId()), 1));
+      case REDSTONE -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.RED, 1));
+      default -> player.getWorld().spawnParticle(particle, location, 0);
+    }
   }
 }
