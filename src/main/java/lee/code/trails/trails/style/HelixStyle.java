@@ -29,7 +29,7 @@ public class HelixStyle implements StyleInterface {
         y = 0.5 * t;
         z = 0.4 * (2 * Math.PI - t) * 0.5 * Math.sin(t + phi + i * Math.PI);
         loc.add(x, y, z);
-        style.addStyleLocation(loc);
+        style.addStyleLocation(loc.clone());
         loc.subtract(x, y, z);
       }
     }
