@@ -1,37 +1,38 @@
 package lee.code.trails.trails.style;
 
+import lee.code.trails.trails.Style;
 import lee.code.trails.trails.StyleInterface;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.TrailParticle;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
 
 public class ForceFieldStyle implements StyleInterface {
-  private final double radius = 0.8;
-  private final int numParticles = 20;
-  private final double angleIncrement = 2 * Math.PI / numParticles;
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, String[] data) {
-    trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
-      if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
-        return;
-      }
-      final Location playerLocation = player.getLocation().clone().add(0, 1, 0);
-      final double yOffset = Math.sin(System.currentTimeMillis() * 0.001) * 1; // Adjust the speed and range of up and down motion here.
-      playerLocation.setY(playerLocation.getY() + yOffset);
+  public Style create(TrailManager trailManager, Player player, TrailParticle trailParticle, String[] data) {
+    final Style style = new Style(trailParticle, data, new ArrayList<>());
+    if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
+      style.addStyleLocation(player.getLocation().add(0, 0.2, 0));
+      return style;
+    }
+    final Location playerLocation = player.getLocation().clone().add(0, 1, 0);
+    final double yOffset = Math.sin(System.currentTimeMillis() * 0.001) * 1; // Adjust the speed and range of up and down motion here.
+    playerLocation.setY(playerLocation.getY() + yOffset);
 
-      for (int i = 0; i < numParticles; i++) {
-        final double angle = i * angleIncrement;
-        final double x = radius * Math.cos(angle);
-        final double z = radius * Math.sin(angle);
-        final Location particleLocation = playerLocation.clone().add(x, 0, z);
-        trailParticle.spawnParticle(player, particleLocation, data);
-      }
-    },0, 200, TimeUnit.MILLISECONDS));
+    final double radius = 0.8;
+    final int numParticles = 20;
+    final double angleIncrement = 2 * Math.PI / numParticles;
+
+    for (int i = 0; i < numParticles; i++) {
+      final double angle = i * angleIncrement;
+      final double x = radius * Math.cos(angle);
+      final double z = radius * Math.sin(angle);
+      final Location particleLocation = playerLocation.clone().add(x, 0, z);
+      style.addStyleLocation(particleLocation);
+    }
+    return style;
   }
 }

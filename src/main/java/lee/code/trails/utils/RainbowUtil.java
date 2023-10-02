@@ -1,14 +1,12 @@
 package lee.code.trails.utils;
 
-import org.bukkit.Color;
-
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class RainbowUtil {
   private final static ConcurrentHashMap<UUID, Double> hues = new ConcurrentHashMap<>();
 
-  public static Color getNextColor(UUID uuid) {
+  public static String[] getNextColor(UUID uuid) {
     if (!hues.containsKey(uuid)) hues.put(uuid, 0.0);
     double hue = hues.get(uuid);
 
@@ -25,7 +23,7 @@ public class RainbowUtil {
     if (hue > 1.0) hue = 0.0;
 
     hues.put(uuid, hue);
-    return Color.fromRGB(red, green, blue);
+    return new String[]{String.valueOf(red), String.valueOf(green), String.valueOf(blue)};
   }
 
   private static int hsvToRgb(double hue) {

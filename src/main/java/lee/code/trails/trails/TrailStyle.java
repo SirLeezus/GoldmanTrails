@@ -6,22 +6,23 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum TrailStyle {
-  HELIX(new HelixStyle()),
-  HALO(new HaloStyle()),
-  SPHERE(new SphereStyle()),
-  BLOCK_BREAK(new BlockBreakStyle()),
-  CUBE(new CubeStyle()),
-  PROJECTILE(new ProjectileStyle()),
-  GROUND_SPIRAL(new GroundSpiralStyle()),
-  FORCE_FIELD(new ForceFieldStyle()),
-  ORBIT(new OrbitStyle()),
-  PULSE(new PulseStyle()),
-  NORMAL(new NormalStyle()),
-  THICK(new ThickStyle()),
-  HEART(new HeartStyle()),
-  BLOCK_PLACE(new BlockPlaceStyle()),
-  DAMAGE(new DamageStyle()),
+  HELIX(new HelixStyle(), StyleType.TIMER),
+  HALO(new HaloStyle(), StyleType.TIMER),
+  SPHERE(new SphereStyle(), StyleType.TIMER),
+  CUBE(new CubeStyle(), StyleType.TIMER),
+  PROJECTILE(new ProjectileStyle(), StyleType.TIMER),
+  GROUND_SPIRAL(new GroundSpiralStyle(), StyleType.TIMER),
+  FORCE_FIELD(new ForceFieldStyle(), StyleType.TIMER),
+  ORBIT(new OrbitStyle(), StyleType.TIMER),
+  PULSE(new PulseStyle(), StyleType.TIMER),
+  NORMAL(new NormalStyle(), StyleType.TIMER),
+  THICK(new ThickStyle(), StyleType.TIMER),
+  HEART(new HeartStyle(), StyleType.TIMER),
+  BLOCK_PLACE(new BlockPlaceStyle(), StyleType.EVENT),
+  DAMAGE(new DamageStyle(), StyleType.EVENT),
+  BLOCK_BREAK(new BlockBreakStyle(), StyleType.EVENT),
   ;
 
   @Getter private final StyleInterface style;
+  @Getter private final StyleType type;
 }

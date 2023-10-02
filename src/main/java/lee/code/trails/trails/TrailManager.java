@@ -2,11 +2,15 @@ package lee.code.trails.trails;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import lee.code.trails.Trails;
+import lee.code.trails.utils.RainbowUtil;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class TrailManager {
   @Getter private final Trails trails;
@@ -22,7 +26,34 @@ public class TrailManager {
   public void startTrail(Player player, TrailParticle trailParticle, TrailStyle trailStyle, String[] data) {
     movementManager.startTracking(trails, player.getUniqueId());
     activeTrails.put(player.getUniqueId(), trailStyle);
+    if (trailStyle.getType().equals(StyleType.TIMER)) timerTrail(player, trailParticle, trailStyle, data);
+    else startEventTrail(player, trailParticle, trailStyle, data);
+  }
+
+  private void startEventTrail(Player player, TrailParticle trailParticle, TrailStyle trailStyle, String[] data) {
     trailStyle.getStyle().start(this, player, trailParticle, data);
+  }
+
+  public void spawnEventTrail(Player player, Style style) {
+    setRainbowData(player.getUniqueId(), style);
+    for (Location location : style.getStyleLocations()) {
+      style.getTrailParticle().spawnParticle(player, location, style.getTrailData());
+    }
+  }
+
+  private void timerTrail(Player player, TrailParticle trailParticle, TrailStyle trailStyle, String[] data) {
+    setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trails, scheduledTask -> {
+      final Style style = trailStyle.getStyle().create(this, player, trailParticle, data);
+      if (style == null) return;
+      setRainbowData(player.getUniqueId(), style);
+      for (Location location : style.getStyleLocations()) {
+        style.getTrailParticle().spawnParticle(player, location, style.getTrailData());
+      }
+    },0, 200, TimeUnit.MILLISECONDS));
+  }
+
+  private void setRainbowData(UUID uuid, Style style) {
+    if (style.getTrailParticle().equals(TrailParticle.RAINBOW)) style.setTrailData(RainbowUtil.getNextColor(uuid));
   }
 
   public void stopTrail(Player player) {
