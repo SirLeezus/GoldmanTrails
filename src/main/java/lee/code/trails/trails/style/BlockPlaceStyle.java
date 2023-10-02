@@ -15,14 +15,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BlockPlaceStyle implements StyleInterface, Listener {
   private TrailManager trailManager;
-  private final ConcurrentHashMap<UUID, int[]> playerTrailData = new ConcurrentHashMap<>();
+  private final ConcurrentHashMap<UUID, String[]> playerTrailData = new ConcurrentHashMap<>();
   private final ConcurrentHashMap<UUID, TrailParticle> playerTrail = new ConcurrentHashMap<>();
   private final double radius = 1.1;
   private final double maxYOffset = 1;
   private final int numParticles = 15;
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, String[] data) {
     if (this.trailManager == null) this.trailManager = trailManager;
     playerTrail.put(player.getUniqueId(), trailParticle);
     playerTrailData.put(player.getUniqueId(), data);

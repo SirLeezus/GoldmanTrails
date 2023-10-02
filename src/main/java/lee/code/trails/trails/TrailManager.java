@@ -19,7 +19,7 @@ public class TrailManager {
     this.movementManager = new MovementManager();
   }
 
-  public void startTrail(Player player, TrailParticle trailParticle, TrailStyle trailStyle, int[] data) {
+  public void startTrail(Player player, TrailParticle trailParticle, TrailStyle trailStyle, String[] data) {
     movementManager.startTracking(trails, player.getUniqueId());
     activeTrails.put(player.getUniqueId(), trailStyle);
     trailStyle.getStyle().start(this, player, trailParticle, data);

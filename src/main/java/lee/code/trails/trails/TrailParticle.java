@@ -1,12 +1,17 @@
 package lee.code.trails.trails;
 
+import com.destroystokyo.paper.ParticleBuilder;
 import lee.code.trails.utils.CoreUtil;
 import lee.code.trails.utils.RainbowUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
 @AllArgsConstructor
 public enum TrailParticle {
@@ -62,15 +67,17 @@ public enum TrailParticle {
   WARPED_SPORE(Particle.WARPED_SPORE),
   VILLAGER_ANGRY(Particle.VILLAGER_ANGRY),
   TOWN_AURA(Particle.TOWN_AURA),
+  FALLING_DUST(Particle.FALLING_DUST),
   ;
 
   private final Particle particle;
 
-  public void spawnParticle(Player player, Location location, int[] data) {
+  public void spawnParticle(Player player, Location location, String[] data) {
     switch (this) {
       case NOTE -> player.getWorld().spawnParticle(particle, location, 0, CoreUtil.getRandomNoteColor() / 24.0, 0, 0, 1);
       case RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1,  new Particle.DustOptions(RainbowUtil.getNextColor(player.getUniqueId()), 1));
-      case REDSTONE -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(data[0], data[1], data[2]), 1));
+      case REDSTONE -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])), 1));
+      case FALLING_DUST -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, Material.valueOf(data[0]).createBlockData());
       default -> player.getWorld().spawnParticle(particle, location, 0);
     }
   }

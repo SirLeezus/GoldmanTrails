@@ -14,7 +14,7 @@ public class SphereStyle implements StyleInterface {
   private final int numParticles = 100;
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, String[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);

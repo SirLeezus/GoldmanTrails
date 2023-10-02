@@ -22,7 +22,7 @@ public class CubeStyle implements StyleInterface {
   };
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, String[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
@@ -58,7 +58,7 @@ public class CubeStyle implements StyleInterface {
     return angles.get(uuid);
   }
 
-  private void spawnLine(Player player, TrailParticle trailParticle, Location start, Location end, int[] data) {
+  private void spawnLine(Player player, TrailParticle trailParticle, Location start, Location end, String[] data) {
     final int particles = 15;
     final double xOffset = (end.getX() - start.getX()) / particles;
     final double yOffset = (end.getY() - start.getY()) / particles;

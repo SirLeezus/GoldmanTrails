@@ -16,7 +16,7 @@ public class GroundSpiralStyle implements StyleInterface {
   private final ConcurrentHashMap<UUID, AtomicDouble> phi = new ConcurrentHashMap<>();
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, String[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
         trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
@@ -40,7 +40,7 @@ public class GroundSpiralStyle implements StyleInterface {
     return phi.get(uuid);
   }
 
-  private void spawnSpiralBelowPlayer(Player player, Location loc, TrailParticle trailParticle, AtomicDouble phi, int[] data) {
+  private void spawnSpiralBelowPlayer(Player player, Location loc, TrailParticle trailParticle, AtomicDouble phi, String[] data) {
     final int scale = 3;
     double x, y, z;
     for (double t = 0; t <= 2 * Math.PI; t += Math.PI / 16) {
