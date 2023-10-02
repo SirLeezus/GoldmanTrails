@@ -16,7 +16,7 @@ public class ThickStyle implements StyleInterface {
   private final Random random = new Random();
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       final Location playerLocation = player.getLocation().add(0, 1, 0);
 
@@ -26,7 +26,7 @@ public class ThickStyle implements StyleInterface {
         final double zOffset = (random.nextDouble() * 2 - 1) * radius;
 
         final Location particleLocation = playerLocation.clone().add(xOffset, yOffset, zOffset);
-        trailParticle.spawnParticle(player, particleLocation);
+        trailParticle.spawnParticle(player, particleLocation, data);
       }
     },0, 200, TimeUnit.MILLISECONDS));
   }

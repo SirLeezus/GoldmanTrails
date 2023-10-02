@@ -22,10 +22,10 @@ public class CubeStyle implements StyleInterface {
   };
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
+        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
         return;
       }
       final Location playerLocation = player.getLocation().add(0, 1, 0);
@@ -41,7 +41,7 @@ public class CubeStyle implements StyleInterface {
       for (int[] edge : edges) {
         final Location start = vertices[edge[0]];
         final Location end = vertices[edge[1]];
-        spawnLine(player, trailParticle, start, end);
+        spawnLine(player, trailParticle, start, end, data);
       }
     },0, 200, TimeUnit.MILLISECONDS));
   }
@@ -58,14 +58,14 @@ public class CubeStyle implements StyleInterface {
     return angles.get(uuid);
   }
 
-  private void spawnLine(Player player, TrailParticle trailParticle, Location start, Location end) {
+  private void spawnLine(Player player, TrailParticle trailParticle, Location start, Location end, int[] data) {
     final int particles = 15;
     final double xOffset = (end.getX() - start.getX()) / particles;
     final double yOffset = (end.getY() - start.getY()) / particles;
     final double zOffset = (end.getZ() - start.getZ()) / particles;
 
     for (int i = 0; i < particles; i++) {
-      trailParticle.spawnParticle(player, start.clone().add(i * xOffset, i * yOffset, i * zOffset));
+      trailParticle.spawnParticle(player, start.clone().add(i * xOffset, i * yOffset, i * zOffset), data);
     }
   }
 

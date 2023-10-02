@@ -16,25 +16,28 @@ import java.util.concurrent.TimeUnit;
 
 public class ProjectileStyle implements StyleInterface, Listener {
   private TrailManager trailManager;
-  private final ConcurrentHashMap<UUID, TrailParticle> players = new ConcurrentHashMap<>();
+  private final ConcurrentHashMap<UUID, int[]> playerTrailData = new ConcurrentHashMap<>();
+  private final ConcurrentHashMap<UUID, TrailParticle> playerTrail = new ConcurrentHashMap<>();
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
     if (this.trailManager == null) this.trailManager = trailManager;
-    players.put(player.getUniqueId(), trailParticle);
+    playerTrail.put(player.getUniqueId(), trailParticle);
+    playerTrailData.put(player.getUniqueId(), data);
   }
 
   @Override
   public void stop(Player player) {
-    players.remove(player.getUniqueId());
+    playerTrail.remove(player.getUniqueId());
+    playerTrailData.remove(player.getUniqueId());
   }
 
   @EventHandler
   public void onTrailShoot(ProjectileLaunchEvent e) {
     if (!(e.getEntity().getShooter() instanceof Player player)) return;
-    if (!players.containsKey(player.getUniqueId())) return;
+    if (!playerTrail.containsKey(player.getUniqueId())) return;
     final ScheduledTask shootTask = Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
-      if (!e.getEntity().isDead()) players.get(player.getUniqueId()).spawnParticle(player, e.getEntity().getLocation());
+      if (!e.getEntity().isDead()) playerTrail.get(player.getUniqueId()).spawnParticle(player, e.getEntity().getLocation(), playerTrailData.get(player.getUniqueId()));
     }, 0, 100, TimeUnit.MILLISECONDS);
     Bukkit.getAsyncScheduler().runDelayed(trailManager.getTrails(), scheduledTask -> shootTask.cancel(), 10, TimeUnit.SECONDS);
   }

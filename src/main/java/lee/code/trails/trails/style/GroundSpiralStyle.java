@@ -16,16 +16,16 @@ public class GroundSpiralStyle implements StyleInterface {
   private final ConcurrentHashMap<UUID, AtomicDouble> phi = new ConcurrentHashMap<>();
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
+        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
         return;
       }
       final AtomicDouble phi = getPhi(player.getUniqueId());
       final Location loc = player.getLocation();
 
-      spawnSpiralBelowPlayer(player, loc, trailParticle, phi);
+      spawnSpiralBelowPlayer(player, loc, trailParticle, phi, data);
       phi.addAndGet(Math.PI / 16);
     },0, 200, TimeUnit.MILLISECONDS));
   }
@@ -40,7 +40,7 @@ public class GroundSpiralStyle implements StyleInterface {
     return phi.get(uuid);
   }
 
-  private void spawnSpiralBelowPlayer(Player player, Location loc, TrailParticle trailParticle, AtomicDouble phi) {
+  private void spawnSpiralBelowPlayer(Player player, Location loc, TrailParticle trailParticle, AtomicDouble phi, int[] data) {
     final int scale = 3;
     double x, y, z;
     for (double t = 0; t <= 2 * Math.PI; t += Math.PI / 16) {
@@ -49,7 +49,7 @@ public class GroundSpiralStyle implements StyleInterface {
         y = 0.1; // Adjust this value to control the height of the spiral below the player
         z = scale * 0.4 * (2 * Math.PI - t) * 0.5 * Math.sin(t + phi.get() + i * Math.PI);
         loc.add(x, y, z);
-        trailParticle.spawnParticle(player, loc);
+        trailParticle.spawnParticle(player, loc, data);
         loc.subtract(x, y, z);
       }
     }

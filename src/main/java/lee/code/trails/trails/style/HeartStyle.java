@@ -16,10 +16,10 @@ public class HeartStyle implements StyleInterface {
   private final double increment = (2 * Math.PI) / numPoints;
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
+        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
         return;
       }
       final double playerYaw = Math.toRadians(player.getLocation().getYaw());
@@ -37,7 +37,7 @@ public class HeartStyle implements StyleInterface {
         z = rotated.getZ();
 
         final Location loc = player.getLocation().add(x, y + 2.2, z);
-        trailParticle.spawnParticle(player, loc);
+        trailParticle.spawnParticle(player, loc, data);
       }
     },0, 200, TimeUnit.MILLISECONDS));
   }

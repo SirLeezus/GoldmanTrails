@@ -66,11 +66,11 @@ public enum TrailParticle {
 
   private final Particle particle;
 
-  public void spawnParticle(Player player, Location location) {
+  public void spawnParticle(Player player, Location location, int[] data) {
     switch (this) {
       case NOTE -> player.getWorld().spawnParticle(particle, location, 0, CoreUtil.getRandomNoteColor() / 24.0, 0, 0, 1);
       case RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1,  new Particle.DustOptions(RainbowUtil.getNextColor(player.getUniqueId()), 1));
-      case REDSTONE -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.RED, 1));
+      case REDSTONE -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(data[0], data[1], data[2]), 1));
       default -> player.getWorld().spawnParticle(particle, location, 0);
     }
   }

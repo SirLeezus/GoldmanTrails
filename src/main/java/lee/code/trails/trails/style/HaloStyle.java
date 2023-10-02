@@ -15,10 +15,10 @@ public class HaloStyle implements StyleInterface {
   private final double angleIncrement = 2 * Math.PI / numParticles;
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
+        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
         return;
       }
       final Location playerLocation = player.getLocation().add(0, 2.2, 0);
@@ -28,7 +28,7 @@ public class HaloStyle implements StyleInterface {
         final double x = radius * Math.cos(angle);
         final double z = radius * Math.sin(angle);
         final Location particleLocation = playerLocation.clone().add(x, 0, z);
-        trailParticle.spawnParticle(player, particleLocation);
+        trailParticle.spawnParticle(player, particleLocation, data);
       }
     },0, 200, TimeUnit.MILLISECONDS));
   }

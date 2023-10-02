@@ -12,10 +12,10 @@ import java.util.concurrent.TimeUnit;
 public class HelixStyle implements StyleInterface {
 
   @Override
-  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle) {
+  public void start(TrailManager trailManager, Player player, TrailParticle trailParticle, int[] data) {
     trailManager.setActiveTrailTask(player.getUniqueId(), Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
       if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0));
+        trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
         return;
       }
       double x, y, z;
@@ -29,7 +29,7 @@ public class HelixStyle implements StyleInterface {
           y = 0.5 * t;
           z = 0.4 * (2 * Math.PI - t) * 0.5 * Math.sin(t + phi + i * Math.PI);
           loc.add(x, y, z);
-          trailParticle.spawnParticle(player, loc);
+          trailParticle.spawnParticle(player, loc, data);
           loc.subtract(x, y, z);
         }
       }
