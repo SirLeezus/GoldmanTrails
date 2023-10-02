@@ -1,14 +1,10 @@
 package lee.code.trails.trails;
 
-import com.destroystokyo.paper.ParticleBuilder;
 import lee.code.trails.utils.CoreUtil;
 import lee.code.trails.utils.RainbowUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.*;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
 @AllArgsConstructor
 public enum TrailParticle {
