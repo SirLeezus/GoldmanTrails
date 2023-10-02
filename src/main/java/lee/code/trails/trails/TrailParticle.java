@@ -52,7 +52,6 @@ public enum TrailParticle {
   SNEEZE(Particle.SNEEZE),
   SNOWBALL(Particle.SNOWBALL),
   SNOWFLAKE(Particle.SNOWFLAKE),
-  SPELL(Particle.SPELL),
   SPELL_MOB(Particle.SPELL_MOB),
   SPELL_INSTANT(Particle.SPELL_INSTANT),
   SPELL_WITCH(Particle.SPELL_WITCH),
