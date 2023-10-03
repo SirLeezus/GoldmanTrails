@@ -49,9 +49,8 @@ public class ParticleMenu extends MenuPaginatedGUI {
         switch (particleItem.getTrailParticle()) {
           case REDSTONE, SPELL_MOB ->
             trails.getMenuManager().openMenu(new ColorMenu(trails, particleItem.getTrailParticle()), player);
-          case FALLING_DUST -> {
-            //TODO dust blocks
-          }
+          case FALLING_DUST, BLOCK_CRACK ->
+            trails.getMenuManager().openMenu(new BlockMenu(trails, particleItem.getTrailParticle()), player);
           default ->
             trails.getMenuManager().openMenu(new StyleMenu(trails, particleItem.getTrailParticle(), new String[]{}), player);
         }
