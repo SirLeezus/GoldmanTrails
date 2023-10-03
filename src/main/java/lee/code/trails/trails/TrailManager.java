@@ -2,6 +2,10 @@ package lee.code.trails.trails;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import lee.code.trails.Trails;
+import lee.code.trails.trails.data.Style;
+import lee.code.trails.trails.data.StyleType;
+import lee.code.trails.trails.data.TrailParticle;
+import lee.code.trails.trails.data.TrailStyle;
 import lee.code.trails.utils.RainbowUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;

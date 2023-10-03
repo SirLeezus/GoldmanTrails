@@ -1,5 +1,7 @@
-package lee.code.trails.trails;
+package lee.code.trails.trails.data;
 
+import lee.code.trails.trails.data.StyleInterface;
+import lee.code.trails.trails.data.StyleType;
 import lee.code.trails.trails.style.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

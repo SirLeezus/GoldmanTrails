@@ -1,4 +1,4 @@
-package lee.code.trails.trails;
+package lee.code.trails.trails.data;
 
 import lee.code.trails.utils.CoreUtil;
 import lee.code.trails.utils.RainbowUtil;

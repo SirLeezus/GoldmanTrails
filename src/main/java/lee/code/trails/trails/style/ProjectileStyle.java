@@ -1,10 +1,10 @@
 package lee.code.trails.trails.style;
 
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
-import lee.code.trails.trails.Style;
-import lee.code.trails.trails.StyleInterface;
+import lee.code.trails.trails.data.Style;
+import lee.code.trails.trails.data.StyleInterface;
 import lee.code.trails.trails.TrailManager;
-import lee.code.trails.trails.TrailParticle;
+import lee.code.trails.trails.data.TrailParticle;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

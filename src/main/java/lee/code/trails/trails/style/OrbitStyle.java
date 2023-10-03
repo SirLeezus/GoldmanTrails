@@ -1,9 +1,9 @@
 package lee.code.trails.trails.style;
 
-import lee.code.trails.trails.Style;
-import lee.code.trails.trails.StyleInterface;
+import lee.code.trails.trails.data.Style;
+import lee.code.trails.trails.data.StyleInterface;
 import lee.code.trails.trails.TrailManager;
-import lee.code.trails.trails.TrailParticle;
+import lee.code.trails.trails.data.TrailParticle;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 

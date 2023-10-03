@@ -5,7 +5,7 @@ import lee.code.trails.commands.TabCompletion;
 import lee.code.trails.commands.TrailsCMD;
 import lee.code.trails.listeners.QuitListener;
 import lee.code.trails.trails.TrailManager;
-import lee.code.trails.trails.TrailStyle;
+import lee.code.trails.trails.data.TrailStyle;
 import lee.code.trails.trails.style.BlockStyle;
 import lee.code.trails.trails.style.DamageStyle;
 import lee.code.trails.trails.style.ProjectileStyle;

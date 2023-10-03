@@ -1,4 +1,4 @@
-package lee.code.trails.trails;
+package lee.code.trails.trails.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

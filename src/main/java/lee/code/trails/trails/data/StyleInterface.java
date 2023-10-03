@@ -1,5 +1,6 @@
-package lee.code.trails.trails;
+package lee.code.trails.trails.data;
 
+import lee.code.trails.trails.TrailManager;
 import org.bukkit.entity.Player;
 
 public interface StyleInterface {
