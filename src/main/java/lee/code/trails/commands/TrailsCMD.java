@@ -5,7 +5,6 @@ import lee.code.trails.Trails;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.TrailParticle;
 import lee.code.trails.trails.TrailStyle;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -27,7 +26,7 @@ public class TrailsCMD implements CommandExecutor {
     }
     final TrailManager trailManager = trails.getTrailManager();
     if (trailManager.hasActiveTrail(player.getUniqueId())) trailManager.stopTrail(player);
-    else trails.getTrailManager().startTrail(player, TrailParticle.RAINBOW, TrailStyle.HELIX, new String[]{"102", "0", "102"});
+    else trails.getTrailManager().startTrail(player, TrailParticle.RAINBOW, TrailStyle.BLOCK, new String[]{"102", "0", "102"});
     return true;
   }
 }

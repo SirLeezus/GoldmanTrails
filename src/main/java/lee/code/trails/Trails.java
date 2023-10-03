@@ -6,8 +6,7 @@ import lee.code.trails.commands.TrailsCMD;
 import lee.code.trails.listeners.QuitListener;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.TrailStyle;
-import lee.code.trails.trails.style.BlockBreakStyle;
-import lee.code.trails.trails.style.BlockPlaceStyle;
+import lee.code.trails.trails.style.BlockStyle;
 import lee.code.trails.trails.style.DamageStyle;
 import lee.code.trails.trails.style.ProjectileStyle;
 import lee.code.trails.utils.RainbowUtil;
@@ -41,9 +40,8 @@ public class Trails extends JavaPlugin {
   }
 
   private void registerListeners() {
-    getServer().getPluginManager().registerEvents((BlockBreakStyle) TrailStyle.BLOCK_BREAK.getStyle(), this);
     getServer().getPluginManager().registerEvents((ProjectileStyle) TrailStyle.PROJECTILE.getStyle(), this);
-    getServer().getPluginManager().registerEvents((BlockPlaceStyle) TrailStyle.BLOCK_PLACE.getStyle(), this);
+    getServer().getPluginManager().registerEvents((BlockStyle) TrailStyle.BLOCK.getStyle(), this);
     getServer().getPluginManager().registerEvents((DamageStyle) TrailStyle.DAMAGE.getStyle(), this);
     getServer().getPluginManager().registerEvents(new QuitListener(this), this);
   }

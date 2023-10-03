@@ -18,9 +18,8 @@ public enum TrailStyle {
   NORMAL(new NormalStyle(), StyleType.TIMER),
   THICK(new ThickStyle(), StyleType.TIMER),
   HEART(new HeartStyle(), StyleType.TIMER),
-  BLOCK_PLACE(new BlockPlaceStyle(), StyleType.EVENT),
+  BLOCK(new BlockStyle(), StyleType.EVENT),
   DAMAGE(new DamageStyle(), StyleType.EVENT),
-  BLOCK_BREAK(new BlockBreakStyle(), StyleType.EVENT),
   ;
 
   @Getter private final StyleInterface style;
