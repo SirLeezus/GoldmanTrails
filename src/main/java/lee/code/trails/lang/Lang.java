@@ -21,6 +21,8 @@ public enum Lang {
   MENU_STYLE_ITEM_TITLE("&e&l{0}"),
   MENU_STYLE_ITEM_LORE("&6» &aClick to activate style!"),
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
+  ERROR_PREVIOUS_PAGE("&7You are already on the first page."),
+  ERROR_NEXT_PAGE("&7You are on the last page."),
 
   ;
   @Getter private final String string;

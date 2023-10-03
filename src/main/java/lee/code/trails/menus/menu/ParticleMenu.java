@@ -2,6 +2,7 @@ package lee.code.trails.menus.menu;
 
 import lee.code.trails.Trails;
 import lee.code.trails.lang.Lang;
+import lee.code.trails.menus.menu.menudata.MenuItem;
 import lee.code.trails.menus.menu.menudata.ParticleItem;
 import lee.code.trails.menus.system.MenuButton;
 import lee.code.trails.menus.system.MenuPaginatedGUI;
@@ -39,6 +40,7 @@ public class ParticleMenu extends MenuPaginatedGUI {
       addButton(paginatedSlots.get(slot), createParticleButton(player, particleItem));
       slot++;
     }
+    addPaginatedButtons(player);
     super.decorate(player);
   }
 
@@ -55,5 +57,30 @@ public class ParticleMenu extends MenuPaginatedGUI {
             trails.getMenuManager().openMenu(new StyleMenu(trails, particleItem.getTrailParticle(), new String[]{}), player);
         }
       });
+  }
+
+  private void addPaginatedButtons(Player player) {
+    addButton(51, new MenuButton().creator(p -> MenuItem.NEXT_PAGE.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        if (!((index + 1) >= ParticleItem.values().length)) {
+          page += 1;
+          clearInventory();
+          clearButtons();
+          decorate(player);
+        } else player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NEXT_PAGE.getComponent(null)));
+      }));
+    addButton(47, new MenuButton().creator(p -> MenuItem.PREVIOUS_PAGE.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        if (page == 0) {
+          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_PREVIOUS_PAGE.getComponent(null)));
+        } else {
+          page -= 1;
+          clearInventory();
+          clearButtons();
+          decorate(player);
+        }
+      }));
   }
 }
