@@ -19,7 +19,7 @@ public class GroundSpiralStyle implements StyleInterface {
   public Style create(TrailManager trailManager, Player player, TrailParticle trailParticle, String[] data) {
     final Style style = new Style(trailParticle, data, new ArrayList<>());
     if (trailManager.getMovementManager().isMoving(player.getUniqueId())) {
-      trailParticle.spawnParticle(player, player.getLocation().add(0, 0.2, 0), data);
+      style.addStyleLocation(player.getLocation().add(0, 0.2, 0));
       return style;
     }
     final AtomicDouble phi = getPhi(player.getUniqueId());

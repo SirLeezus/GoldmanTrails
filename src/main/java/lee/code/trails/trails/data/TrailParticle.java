@@ -26,7 +26,7 @@ public enum TrailParticle {
   CRIT(Particle.CRIT),
   CRIT_MAGIC(Particle.CRIT_MAGIC),
   DAMAGE_INDICATOR(Particle.DAMAGE_INDICATOR),
-  DOLPHIN(Particle.DOLPHIN),
+  WATER_DROP(Particle.DOLPHIN),
   DRAGON_BREATH(Particle.DRAGON_BREATH),
   DRIP_LAVA(Particle.DRIP_LAVA),
   DRIP_WATER(Particle.DRIP_WATER),
@@ -47,8 +47,8 @@ public enum TrailParticle {
   SNEEZE(Particle.SNEEZE),
   SNOWBALL(Particle.SNOWBALL),
   SNOWFLAKE(Particle.SNOWFLAKE),
-  SPELL_MOB(Particle.SPELL_MOB),
-  SPELL_MOB_RAINBOW(Particle.SPELL_MOB),
+  POTION_EFFECT(Particle.SPELL_MOB),
+  POTION_EFFECT_RAINBOW(Particle.SPELL_MOB),
   SPELL_INSTANT(Particle.SPELL_INSTANT),
   SPELL_WITCH(Particle.SPELL_WITCH),
   SPIT(Particle.SPIT),
@@ -69,7 +69,7 @@ public enum TrailParticle {
       case NOTE -> player.getWorld().spawnParticle(particle, location, 0, CoreUtil.getRandomNoteColor() / 24.0, 0, 0, 1);
       case REDSTONE, REDSTONE_RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])), 1));
       case FALLING_DUST, BLOCK_CRACK -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, Material.valueOf(data[0]).createBlockData());
-      case SPELL_MOB, SPELL_MOB_RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, Integer.parseInt(data[0]) / 255D, Integer.parseInt(data[1]) / 255D, Integer.parseInt(data[2]) / 255D, 1);
+      case POTION_EFFECT, POTION_EFFECT_RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, Integer.parseInt(data[0]) / 255D, Integer.parseInt(data[1]) / 255D, Integer.parseInt(data[2]) / 255D, 1);
       default -> player.getWorld().spawnParticle(particle, location, 0);
     }
   }

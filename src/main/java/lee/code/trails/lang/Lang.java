@@ -7,12 +7,12 @@ import net.kyori.adventure.text.Component;
 
 @AllArgsConstructor
 public enum Lang {
-  PREFIX("&d&lTrails &6➔ "),
-  MENU_PARTICLE_TITLE("&d&lTrail Particles"),
-  MENU_COLOR_TITLE("&d&lTrail Color Option"),
-  MENU_BLOCK_TITLE("&d&lTrail Block Option"),
-  MENU_STYLE_TITLE("&d&lTrail Styles"),
-  MENU_OPTION_TITLE("&d&lTrail Particle Options"),
+  PREFIX("&#DF01DF&lTrails &6➔ "),
+  MENU_PARTICLE_TITLE("&#DF01DF&lTrail Particles"),
+  MENU_COLOR_TITLE("&#DF01DF&lTrail Color Option"),
+  MENU_BLOCK_TITLE("&#DF01DF&lTrail Block Option"),
+  MENU_STYLE_TITLE("&#DF01DF&lTrail Styles"),
+  MENU_OPTION_TITLE("&#DF01DF&lTrail Particle Options"),
   MENU_PARTICLE_ITEM_TITLE("&e&l{0}"),
   MENU_PARTICLE_ITEM_LORE("&6» &aClick to activate trail!"),
   MENU_COLOR_ITEM_LORE("&6» &aClick to activate color!"),
