@@ -3,6 +3,7 @@ package lee.code.trails.menus.menu;
 import lee.code.trails.Trails;
 import lee.code.trails.lang.Lang;
 import lee.code.trails.menus.menu.menudata.BlockItem;
+import lee.code.trails.menus.menu.menudata.MenuItem;
 import lee.code.trails.menus.system.MenuButton;
 import lee.code.trails.menus.system.MenuPaginatedGUI;
 import lee.code.trails.trails.data.TrailParticle;
@@ -27,12 +28,13 @@ public class BlockMenu extends MenuPaginatedGUI {
 
   @Override
   public void decorate(Player player) {
-    addFillerGlass();
+    addBorderGlass();
     int slot = 0;
     for (BlockItem blockItem : BlockItem.values()) {
       addButton(paginatedSlots.get(slot), createBlockButton(player, blockItem));
       slot++;
     }
+    addBackButton(player);
     super.decorate(player);
   }
 
@@ -42,5 +44,14 @@ public class BlockMenu extends MenuPaginatedGUI {
         getMenuSoundManager().playClickSound(player);
         trails.getMenuManager().openMenu(new StyleMenu(trails, trailParticle, new String[]{blockItem.getMaterial().name()}), player);
       });
+  }
+
+  private void addBackButton(Player player) {
+    addButton(49, new MenuButton()
+      .creator(p -> MenuItem.BACK_MENU.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        trails.getMenuManager().openMenu(new ParticleMenu(trails), player);
+      }));
   }
 }
