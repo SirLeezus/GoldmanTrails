@@ -1,4 +1,4 @@
-package lee.code.trails;
+package lee.code.trails.lang;
 
 import lee.code.trails.utils.CoreUtil;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component;
 @AllArgsConstructor
 public enum Lang {
   PREFIX("&d&lTrails &6➔ "),
+  MENU_TRAILS_TITLE("&d&lTrails"),
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
 
   ;

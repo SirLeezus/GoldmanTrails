@@ -1,7 +1,8 @@
 package lee.code.trails.commands;
 
-import lee.code.trails.Lang;
+import lee.code.trails.lang.Lang;
 import lee.code.trails.Trails;
+import lee.code.trails.menus.menu.TrailMenu;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.data.TrailParticle;
 import lee.code.trails.trails.data.TrailStyle;
@@ -24,9 +25,10 @@ public class TrailsCMD implements CommandExecutor {
       sender.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NOT_CONSOLE_COMMAND.getComponent(null)));
       return true;
     }
-    final TrailManager trailManager = trails.getTrailManager();
-    if (trailManager.hasActiveTrail(player.getUniqueId())) trailManager.stopTrail(player);
-    else trails.getTrailManager().startTrail(player, TrailParticle.RAINBOW, TrailStyle.GROUND_SPIRAL, new String[]{"102", "0", "102"});
+    trails.getMenuManager().openMenu(new TrailMenu(trails), player);
+//    final TrailManager trailManager = trails.getTrailManager();
+//    if (trailManager.hasActiveTrail(player.getUniqueId())) trailManager.stopTrail(player);
+//    else trails.getTrailManager().startTrail(player, TrailParticle.RAINBOW, TrailStyle.THICK, new String[]{"102", "0", "102"});
     return true;
   }
 }

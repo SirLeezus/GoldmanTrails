@@ -4,6 +4,8 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.trails.commands.TabCompletion;
 import lee.code.trails.commands.TrailsCMD;
 import lee.code.trails.listeners.QuitListener;
+import lee.code.trails.menus.system.MenuListener;
+import lee.code.trails.menus.system.MenuManager;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.data.TrailStyle;
 import lee.code.trails.trails.style.BlockStyle;
@@ -19,10 +21,11 @@ import java.io.IOException;
 
 public class Trails extends JavaPlugin {
   @Getter private TrailManager trailManager;
-  @Getter private RainbowUtil rainbowUtil;
+  @Getter private MenuManager menuManager;
 
   @Override
   public void onEnable() {
+    this.menuManager = new MenuManager();
     this.trailManager = new TrailManager(this);
     registerCommands();
     registerListeners();
@@ -43,6 +46,7 @@ public class Trails extends JavaPlugin {
     getServer().getPluginManager().registerEvents((ProjectileStyle) TrailStyle.PROJECTILE.getStyle(), this);
     getServer().getPluginManager().registerEvents((BlockStyle) TrailStyle.BLOCK.getStyle(), this);
     getServer().getPluginManager().registerEvents((DamageStyle) TrailStyle.DAMAGE.getStyle(), this);
+    getServer().getPluginManager().registerEvents(new MenuListener(menuManager), this);
     getServer().getPluginManager().registerEvents(new QuitListener(this), this);
   }
 
