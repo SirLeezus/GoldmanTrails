@@ -3,7 +3,6 @@ package lee.code.trails.menus.menu;
 import lee.code.trails.Trails;
 import lee.code.trails.lang.Lang;
 import lee.code.trails.menus.menu.menudata.ParticleItem;
-import lee.code.trails.menus.menu.menudata.options.ParticleOption;
 import lee.code.trails.menus.system.MenuButton;
 import lee.code.trails.menus.system.MenuPaginatedGUI;
 import org.bukkit.Bukkit;
@@ -47,10 +46,14 @@ public class ParticleMenu extends MenuPaginatedGUI {
     return new MenuButton().creator(p -> particleItem.createItem())
       .consumer(e -> {
         getMenuSoundManager().playClickSound(player);
-        if (ParticleOption.valueOf(particleItem.name()).getOptions() == null) {
-          trails.getMenuManager().openMenu(new StyleMenu(trails, particleItem.getTrailParticle(), new String[]{}), player);
-        } else {
-
+        switch (particleItem.getTrailParticle()) {
+          case REDSTONE -> {
+            //TODO redston colors
+          }
+          case FALLING_DUST -> {
+            //TODO dust blocks
+          }
+          default -> trails.getMenuManager().openMenu(new StyleMenu(trails, particleItem.getTrailParticle(), new String[]{}), player);
         }
       });
   }

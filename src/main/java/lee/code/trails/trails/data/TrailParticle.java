@@ -1,7 +1,6 @@
 package lee.code.trails.trails.data;
 
 import lee.code.trails.utils.CoreUtil;
-import lee.code.trails.utils.RainbowUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
