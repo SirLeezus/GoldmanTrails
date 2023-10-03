@@ -58,7 +58,8 @@ public class TrailManager {
   }
 
   private void setRainbowData(UUID uuid, Style style) {
-    if (style.getTrailParticle().equals(TrailParticle.RAINBOW)) style.setTrailData(RainbowUtil.getNextColor(uuid));
+    final TrailParticle trailParticle = style.getTrailParticle();
+    if (trailParticle.equals(TrailParticle.REDSTONE_RAINBOW) || trailParticle.equals(TrailParticle.SPELL_MOB_RAINBOW)) style.setTrailData(RainbowUtil.getNextColor(uuid));
   }
 
   public void stopTrail(Player player) {

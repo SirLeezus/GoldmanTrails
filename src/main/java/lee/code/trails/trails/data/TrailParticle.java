@@ -17,7 +17,7 @@ public enum TrailParticle {
   ASH(Particle.ASH),
   SOUL_FIRE_FLAME(Particle.SOUL_FIRE_FLAME),
   REDSTONE(Particle.REDSTONE),
-  RAINBOW(Particle.REDSTONE),
+  REDSTONE_RAINBOW(Particle.REDSTONE),
   ELECTRIC_SPARK(Particle.ELECTRIC_SPARK),
   BUBBLE_POP(Particle.BUBBLE_POP),
   CAMPFIRE_COSY_SMOKE(Particle.CAMPFIRE_COSY_SMOKE),
@@ -48,6 +48,7 @@ public enum TrailParticle {
   SNOWBALL(Particle.SNOWBALL),
   SNOWFLAKE(Particle.SNOWFLAKE),
   SPELL_MOB(Particle.SPELL_MOB),
+  SPELL_MOB_RAINBOW(Particle.SPELL_MOB),
   SPELL_INSTANT(Particle.SPELL_INSTANT),
   SPELL_WITCH(Particle.SPELL_WITCH),
   SPIT(Particle.SPIT),
@@ -66,9 +67,9 @@ public enum TrailParticle {
   public void spawnParticle(Player player, Location location, String[] data) {
     switch (this) {
       case NOTE -> player.getWorld().spawnParticle(particle, location, 0, CoreUtil.getRandomNoteColor() / 24.0, 0, 0, 1);
-      case REDSTONE, RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])), 1));
+      case REDSTONE, REDSTONE_RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, new Particle.DustOptions(Color.fromRGB(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])), 1));
       case FALLING_DUST, BLOCK_CRACK -> player.getWorld().spawnParticle(particle, location, 0, 0, 0, 0, 1, Material.valueOf(data[0]).createBlockData());
-      case SPELL_MOB -> player.getWorld().spawnParticle(particle, location, 0, Integer.parseInt(data[0]) / 255D, Integer.parseInt(data[1]) / 255D, Integer.parseInt(data[2]) / 255D, 1);
+      case SPELL_MOB, SPELL_MOB_RAINBOW -> player.getWorld().spawnParticle(particle, location, 0, Integer.parseInt(data[0]) / 255D, Integer.parseInt(data[1]) / 255D, Integer.parseInt(data[2]) / 255D, 1);
       default -> player.getWorld().spawnParticle(particle, location, 0);
     }
   }
