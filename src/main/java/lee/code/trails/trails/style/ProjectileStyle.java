@@ -37,12 +37,13 @@ public class ProjectileStyle implements StyleInterface, Listener {
     if (!(e.getEntity().getShooter() instanceof Player player)) return;
     if (!playerTrail.containsKey(player.getUniqueId())) return;
     final Entity entity = e.getEntity();
+    final Style style = playerTrail.get(player.getUniqueId());
+    final Style targetStyle = new Style(style.getTrailParticle(), style.getTrailData(), new ArrayList<>());
     final ScheduledTask shootTask = Bukkit.getAsyncScheduler().runAtFixedRate(trailManager.getTrails(), scheduledTask -> {
-      if (!e.getEntity().isDead()) {
-        final Style style = playerTrail.get(player.getUniqueId());
-        style.clearLocations();
-        style.addStyleLocation(entity.getLocation());
-        trailManager.spawnEventTrail(player, style);
+      if (!entity.isDead()) {
+        targetStyle.clearLocations();
+        targetStyle.addStyleLocation(entity.getLocation());
+        trailManager.spawnEventTrail(player, targetStyle);
       }
     }, 0, 100, TimeUnit.MILLISECONDS);
     Bukkit.getAsyncScheduler().runDelayed(trailManager.getTrails(), scheduledTask -> shootTask.cancel(), 10, TimeUnit.SECONDS);

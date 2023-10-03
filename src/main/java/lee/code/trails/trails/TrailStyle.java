@@ -10,7 +10,6 @@ public enum TrailStyle {
   HALO(new HaloStyle(), StyleType.TIMER),
   SPHERE(new SphereStyle(), StyleType.TIMER),
   CUBE(new CubeStyle(), StyleType.TIMER),
-  PROJECTILE(new ProjectileStyle(), StyleType.TIMER),
   GROUND_SPIRAL(new GroundSpiralStyle(), StyleType.TIMER),
   FORCE_FIELD(new ForceFieldStyle(), StyleType.TIMER),
   ORBIT(new OrbitStyle(), StyleType.TIMER),
@@ -20,6 +19,7 @@ public enum TrailStyle {
   HEART(new HeartStyle(), StyleType.TIMER),
   BLOCK(new BlockStyle(), StyleType.EVENT),
   DAMAGE(new DamageStyle(), StyleType.EVENT),
+  PROJECTILE(new ProjectileStyle(), StyleType.EVENT),
   ;
 
   @Getter private final StyleInterface style;
