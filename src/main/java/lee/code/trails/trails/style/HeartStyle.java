@@ -5,7 +5,6 @@ import lee.code.trails.trails.data.StyleInterface;
 import lee.code.trails.trails.TrailManager;
 import lee.code.trails.trails.data.TrailParticle;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 
@@ -23,19 +22,21 @@ public class HeartStyle implements StyleInterface {
     final double radius = 0.2; // Adjust the size of the heart here
     final double increment = (2 * Math.PI) / numPoints;
 
+    // Calculate the rotation matrix based on player's yaw
+    final double cosYaw = Math.cos(playerYaw);
+    final double sinYaw = Math.sin(playerYaw);
+
     for (int i = 0; i < numPoints; i++) {
       final double angle = 0 + i * increment;
-      double x = radius * (16 * Math.pow(Math.sin(angle), 3));
-      double y = radius * (13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
-      double z = 0;
+      final double x = radius * (16 * Math.pow(Math.sin(angle), 3));
+      final double y = radius * (13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
+      final double z = 0;
 
-      // Rotate the point based on player's yaw
-      final Vector rotated = new Vector(x, y, z).rotateAroundY(playerYaw);
-      x = rotated.getX();
-      y = rotated.getY();
-      z = rotated.getZ();
+      // Apply the rotation matrix
+      final double newX = cosYaw * x - sinYaw * z;
+      final double newZ = sinYaw * x + cosYaw * z;
 
-      style.addStyleLocation(player.getLocation().add(x, y + 2.2, z));
+      style.addStyleLocation(player.getLocation().add(newX, y + 2.2, newZ));
     }
     return style;
   }
