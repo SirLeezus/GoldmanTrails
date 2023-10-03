@@ -8,7 +8,12 @@ import net.kyori.adventure.text.Component;
 @AllArgsConstructor
 public enum Lang {
   PREFIX("&d&lTrails &6➔ "),
-  MENU_TRAILS_TITLE("&d&lTrails"),
+  MENU_PARTICLE_TITLE("&d&lTrail Particles"),
+  MENU_STYLE_TITLE("&d&lTrail Styles"),
+  MENU_PARTICLE_ITEM_TITLE("&e&l{0}"),
+  MENU_PARTICLE_ITEM_LORE("&6» &aClick to activate trail!"),
+  MENU_STYLE_ITEM_TITLE("&e&l{0}"),
+  MENU_STYLE_ITEM_LORE("&6» &aClick to activate style!"),
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
 
   ;
