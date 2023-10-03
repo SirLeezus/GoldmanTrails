@@ -58,6 +58,7 @@ public class ItemUtil {
     itemMeta.addItemFlags(ItemFlag.HIDE_DYE);
     itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
     itemMeta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+    itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
     itemStack.setItemMeta(itemMeta);
   }
 

@@ -22,13 +22,30 @@ public enum BlockItem {
   RED_MUSHROOM_BLOCK(Material.RED_MUSHROOM_BLOCK),
   SLIME_BLOCK(Material.SLIME_BLOCK),
   HONEY_BLOCK(Material.HONEY_BLOCK),
-  SCULK(Material.SCULK)
+  SCULK(Material.SCULK),
+  SHROOMLIGHT(Material.SHROOMLIGHT),
+  CRYING_OBSIDIAN(Material.CRYING_OBSIDIAN),
+  VERDANT_FROGLIGHT(Material.VERDANT_FROGLIGHT),
+  MAGMA_BLOCK(Material.MAGMA_BLOCK),
+  PURPUR_BLOCK(Material.PURPUR_BLOCK),
+  AMETHYST_BLOCK(Material.AMETHYST_BLOCK),
+  ORANGE_GLAZED_TERRACOTTA(Material.ORANGE_GLAZED_TERRACOTTA),
+  WHITE_GLAZED_TERRACOTTA(Material.WHITE_GLAZED_TERRACOTTA),
+  PURPLE_GLAZED_TERRACOTTA(Material.PURPLE_GLAZED_TERRACOTTA),
+  LIGHT_BLUE_GLAZED_TERRACOTTA(Material.LIGHT_BLUE_GLAZED_TERRACOTTA),
+  CHERRY_LEAVES(Material.CHERRY_LEAVES),
+  ICE(Material.ICE),
+  MELON(Material.MELON),
+  PRISMARINE(Material.PRISMARINE),
+  SPAWNER(Material.SPAWNER)
 
   ;
 
   @Getter private final Material material;
 
   public ItemStack createItem() {
-    return ItemUtil.createItem(material, Lang.MENU_BLOCK_ITEM_NAME.getString(new String[]{CoreUtil.capitalize(material.name())}), Lang.MENU_BLOCK_ITEM_LORE.getString(), 0, null);
+    final ItemStack item = ItemUtil.createItem(material, Lang.MENU_BLOCK_ITEM_NAME.getString(new String[]{CoreUtil.capitalize(material.name())}), Lang.MENU_BLOCK_ITEM_LORE.getString(), 0, null);
+    ItemUtil.hideItemFlags(item);
+    return item;
   }
 }
