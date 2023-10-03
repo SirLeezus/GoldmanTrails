@@ -35,8 +35,7 @@ public class DamageStyle implements StyleInterface, Listener {
     if (!(e.getDamager() instanceof Player player)) return;
     if (!playerTrail.containsKey(player.getUniqueId())) return;
     Bukkit.getAsyncScheduler().runNow(trailManager.getTrails(), scheduledTask -> {
-      final Style style = playerTrail.get(player.getUniqueId());
-      style.clearLocations();
+      final Style style = playerTrail.get(player.getUniqueId()).cloneStyle();
       final Location mobLocation = e.getEntity().getLocation().add(0, e.getEntity().getHeight() / 2, 0);
       final double radius = 0.5;
       final int numParticles = 15;

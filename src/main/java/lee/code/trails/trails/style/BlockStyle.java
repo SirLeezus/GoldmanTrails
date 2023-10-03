@@ -38,8 +38,7 @@ public class BlockStyle implements StyleInterface, Listener {
     final Player player = e.getPlayer();
     final Block block = e.getBlock();
     Bukkit.getAsyncScheduler().runNow(trailManager.getTrails(), scheduledTask -> {
-      final Style style = playerTrail.get(player.getUniqueId());
-      style.clearLocations();
+      final Style style = playerTrail.get(player.getUniqueId()).cloneStyle();
       final Location blockLocation = block.getLocation().add(0.5, 0.0, 0.5); // Center of the block with no vertical offset
       final double radius = 1.1;
       final double maxYOffset = 1;
@@ -62,12 +61,11 @@ public class BlockStyle implements StyleInterface, Listener {
     final Player player = e.getPlayer();
     final Block block = e.getBlock();
     Bukkit.getAsyncScheduler().runNow(trailManager.getTrails(), scheduledTask -> {
+      final Style style = playerTrail.get(player.getUniqueId()).cloneStyle();
       final Location blockLocation = block.getLocation().add(0.5, 0.0, 0.5); // Center of the block with no vertical offset
       final double radius = 0.5;
       final double maxYOffset = 1;
       final int numParticles = 25;
-      final Style style = playerTrail.get(player.getUniqueId());
-      style.clearLocations();
       for (int i = 0; i < numParticles; i++) {
         final double randomX = (Math.random() * 2 - 1) * radius;
         final double randomY = Math.random() * maxYOffset; // Limited height range

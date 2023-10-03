@@ -21,4 +21,8 @@ public class Style {
   public void clearLocations() {
     styleLocations.clear();
   }
+
+  public Style cloneStyle() {
+    return new Style(trailParticle, trailData, new ArrayList<>());
+  }
 }
