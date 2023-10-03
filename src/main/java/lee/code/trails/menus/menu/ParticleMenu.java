@@ -47,13 +47,13 @@ public class ParticleMenu extends MenuPaginatedGUI {
       .consumer(e -> {
         getMenuSoundManager().playClickSound(player);
         switch (particleItem.getTrailParticle()) {
-          case REDSTONE -> {
-            //TODO redston colors
-          }
+          case REDSTONE, SPELL_MOB ->
+            trails.getMenuManager().openMenu(new ColorMenu(trails, particleItem.getTrailParticle()), player);
           case FALLING_DUST -> {
             //TODO dust blocks
           }
-          default -> trails.getMenuManager().openMenu(new StyleMenu(trails, particleItem.getTrailParticle(), new String[]{}), player);
+          default ->
+            trails.getMenuManager().openMenu(new StyleMenu(trails, particleItem.getTrailParticle(), new String[]{}), player);
         }
       });
   }
