@@ -8,6 +8,8 @@ import net.kyori.adventure.text.Component;
 @AllArgsConstructor
 public enum Lang {
   PREFIX("&#DF01DF&lTrails &6➔ "),
+  ON("&2&lON"),
+  OFF("&c&lOFF"),
   MENU_PARTICLE_TITLE("&#DF01DF&lTrail Particles"),
   MENU_COLOR_TITLE("&#DF01DF&lTrail Color Option"),
   MENU_BLOCK_TITLE("&#DF01DF&lTrail Block Option"),
@@ -19,10 +21,12 @@ public enum Lang {
   MENU_BLOCK_ITEM_LORE("&6» &aClick to activate block!"),
   MENU_BLOCK_ITEM_NAME("&e&l{0}"),
   MENU_STYLE_ITEM_TITLE("&e&l{0}"),
+  MENU_TOGGLE_TRAIL_SUCCESSFUL("&aYou successfully toggled your trail {0}&a!"),
   MENU_STYLE_ITEM_LORE("&6» &aClick to activate style!"),
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
   ERROR_PREVIOUS_PAGE("&7You are already on the first page."),
   ERROR_NEXT_PAGE("&7You are on the last page."),
+  ERROR_NO_TRAIL_DATA("&7You have never selected a trail before so it can't be toggled."),
 
   ;
   @Getter private final String string;

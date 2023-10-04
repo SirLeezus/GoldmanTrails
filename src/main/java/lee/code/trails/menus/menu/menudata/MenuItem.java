@@ -1,5 +1,6 @@
 package lee.code.trails.menus.menu.menudata;
 
+import lee.code.trails.lang.Lang;
 import lee.code.trails.utils.ItemUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
@@ -12,7 +13,7 @@ public enum MenuItem {
   NEXT_PAGE(Material.PAPER, "&e&lNext Page ->", null, false, false, null),
   PREVIOUS_PAGE(Material.PAPER, "&e&l<- Prev Page", null, false, false, null),
   BACK_MENU(Material.BARRIER, "&c&l<-- Back", null, false, false, null),
-  TOGGLE_TRAIL(Material.RED_STAINED_GLASS_PANE, "&e&lTrail Activated", null, false, false, null),
+  TOGGLE_TRAIL(Material.RED_STAINED_GLASS_PANE, "&e&lTrail Status", null, false, false, null),
 
   ;
 
@@ -28,5 +29,11 @@ public enum MenuItem {
     if (hideItemFlags) ItemUtil.hideItemFlags(item);
     if (enchantItem) ItemUtil.enchantItem(item, Enchantment.ARROW_INFINITE, 1);
     return item;
+  }
+
+  public ItemStack createToggleItem(boolean option) {
+    final String lore = option ? Lang.ON.getString() : Lang.OFF.getString();
+    final Material mat = option ? Material.LIME_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE;
+    return ItemUtil.createItem(mat, name, lore, 0, skin);
   }
 }

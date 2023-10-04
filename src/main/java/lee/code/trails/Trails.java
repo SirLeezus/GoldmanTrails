@@ -5,6 +5,7 @@ import lee.code.trails.commands.TabCompletion;
 import lee.code.trails.commands.TrailsCMD;
 import lee.code.trails.database.CacheManager;
 import lee.code.trails.database.DatabaseManager;
+import lee.code.trails.listeners.JoinListener;
 import lee.code.trails.listeners.QuitListener;
 import lee.code.trails.menus.system.MenuListener;
 import lee.code.trails.menus.system.MenuManager;
@@ -54,6 +55,7 @@ public class Trails extends JavaPlugin {
     getServer().getPluginManager().registerEvents((DamageStyle) TrailStyle.DAMAGE.getStyle(), this);
     getServer().getPluginManager().registerEvents(new MenuListener(menuManager), this);
     getServer().getPluginManager().registerEvents(new QuitListener(this), this);
+    getServer().getPluginManager().registerEvents(new JoinListener(this), this);
   }
 
   private void loadCommodoreData() {

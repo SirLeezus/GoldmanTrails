@@ -54,6 +54,7 @@ public class StyleMenu extends MenuPaginatedGUI {
       .consumer(e -> {
         getMenuSoundManager().playClickSound(player);
         trails.getTrailManager().startTrail(player, trailParticle, styleItem.getTrailStyle(), trailData);
+        player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_TOGGLE_TRAIL_SUCCESSFUL.getComponent(new String[]{Lang.ON.getString()})));
         getInventory().close();
       });
   }

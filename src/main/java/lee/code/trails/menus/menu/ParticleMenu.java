@@ -7,11 +7,13 @@ import lee.code.trails.menus.menu.menudata.MenuItem;
 import lee.code.trails.menus.menu.menudata.ParticleItem;
 import lee.code.trails.menus.system.MenuButton;
 import lee.code.trails.menus.system.MenuPaginatedGUI;
+import lee.code.trails.trails.TrailManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ParticleMenu extends MenuPaginatedGUI {
   private final Trails trails;
@@ -62,12 +64,24 @@ public class ParticleMenu extends MenuPaginatedGUI {
   }
 
   private void addToggleTailButton(Player player) {
-    addButton(49, new MenuButton().creator(p -> MenuItem.TOGGLE_TRAIL.createItem())
+    addButton(49, new MenuButton().creator(p -> MenuItem.TOGGLE_TRAIL.createToggleItem(trails.getTrailManager().hasActiveTrail(player.getUniqueId())))
       .consumer(e -> {
-        getMenuSoundManager().playClickSound(player);
+        final TrailManager trailManager = trails.getTrailManager();
         final CachePlayers cachePlayers = trails.getCacheManager().getCachePlayers();
-        if (cachePlayers.hasTrailData(player.getUniqueId())) {
-
+        getMenuSoundManager().playClickSound(player);
+        final UUID uuid = player.getUniqueId();
+        if (trailManager.hasActiveTrail(uuid)) {
+          trailManager.stopTrail(player);
+          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_TOGGLE_TRAIL_SUCCESSFUL.getComponent(new String[]{Lang.OFF.getString()})));
+          getInventory().close();
+        } else {
+          if (cachePlayers.hasTrailData(uuid)) {
+            trails.getTrailManager().startTrail(player, cachePlayers.getParticle(uuid), cachePlayers.getStyle(uuid), cachePlayers.getParticleData(uuid));
+            player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_TOGGLE_TRAIL_SUCCESSFUL.getComponent(new String[]{Lang.ON.getString()})));
+            getInventory().close();
+          } else {
+            player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NO_TRAIL_DATA.getComponent(null)));
+          }
         }
       }));
   }

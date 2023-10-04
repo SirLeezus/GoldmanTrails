@@ -49,7 +49,7 @@ public class CachePlayers extends DatabaseHandler {
   }
 
   public void saveTrailSelection(UUID uuid, TrailParticle trailParticle, TrailStyle trailStyle, String[] trailData) {
-    final PlayerTable playerTable = new PlayerTable(uuid);
+    final PlayerTable playerTable = getPlayerTable(uuid);
     playerTable.setParticle(trailParticle.name());
     playerTable.setStyle(trailStyle.name());
     playerTable.setParticleData(StringUtils.join(trailData, ","));
