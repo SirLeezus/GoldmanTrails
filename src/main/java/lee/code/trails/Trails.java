@@ -3,6 +3,8 @@ package lee.code.trails;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.trails.commands.TabCompletion;
 import lee.code.trails.commands.TrailsCMD;
+import lee.code.trails.database.CacheManager;
+import lee.code.trails.database.DatabaseManager;
 import lee.code.trails.listeners.QuitListener;
 import lee.code.trails.menus.system.MenuListener;
 import lee.code.trails.menus.system.MenuManager;
@@ -11,7 +13,6 @@ import lee.code.trails.trails.data.TrailStyle;
 import lee.code.trails.trails.style.BlockStyle;
 import lee.code.trails.trails.style.DamageStyle;
 import lee.code.trails.trails.style.ProjectileStyle;
-import lee.code.trails.utils.RainbowUtil;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
 import me.lucko.commodore.file.CommodoreFileReader;
@@ -22,18 +23,23 @@ import java.io.IOException;
 public class Trails extends JavaPlugin {
   @Getter private TrailManager trailManager;
   @Getter private MenuManager menuManager;
+  @Getter private CacheManager cacheManager;
+  private DatabaseManager databaseManager;
 
   @Override
   public void onEnable() {
+    this.databaseManager = new DatabaseManager(this);
+    this.cacheManager = new CacheManager(databaseManager);
     this.menuManager = new MenuManager();
     this.trailManager = new TrailManager(this);
+    databaseManager.initialize(false);
     registerCommands();
     registerListeners();
   }
 
   @Override
   public void onDisable() {
-
+    databaseManager.closeConnection();
   }
 
   private void registerCommands() {

@@ -29,6 +29,7 @@ public class TrailManager {
 
   public void startTrail(Player player, TrailParticle trailParticle, TrailStyle trailStyle, String[] data) {
     if (hasActiveTrail(player.getUniqueId())) stopTrail(player);
+    trails.getCacheManager().getCachePlayers().saveTrailSelection(player.getUniqueId(), trailParticle, trailStyle, data);
     movementManager.startTracking(trails, player.getUniqueId());
     activeTrails.put(player.getUniqueId(), trailStyle);
     if (trailStyle.getType().equals(StyleType.TIMER)) timerTrail(player, trailParticle, trailStyle, data);

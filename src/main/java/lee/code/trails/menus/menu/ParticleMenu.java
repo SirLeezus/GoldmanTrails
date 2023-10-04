@@ -1,6 +1,7 @@
 package lee.code.trails.menus.menu;
 
 import lee.code.trails.Trails;
+import lee.code.trails.database.cache.CachePlayers;
 import lee.code.trails.lang.Lang;
 import lee.code.trails.menus.menu.menudata.MenuItem;
 import lee.code.trails.menus.menu.menudata.ParticleItem;
@@ -41,6 +42,7 @@ public class ParticleMenu extends MenuPaginatedGUI {
       slot++;
     }
     addPaginatedButtons(player);
+    addToggleTailButton(player);
     super.decorate(player);
   }
 
@@ -57,6 +59,17 @@ public class ParticleMenu extends MenuPaginatedGUI {
             trails.getMenuManager().openMenu(new StyleMenu(trails, particleItem.getTrailParticle(), new String[]{}), player);
         }
       });
+  }
+
+  private void addToggleTailButton(Player player) {
+    addButton(49, new MenuButton().creator(p -> MenuItem.TOGGLE_TRAIL.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        final CachePlayers cachePlayers = trails.getCacheManager().getCachePlayers();
+        if (cachePlayers.hasTrailData(player.getUniqueId())) {
+
+        }
+      }));
   }
 
   private void addPaginatedButtons(Player player) {

@@ -12,6 +12,7 @@ public enum MenuItem {
   NEXT_PAGE(Material.PAPER, "&e&lNext Page ->", null, false, false, null),
   PREVIOUS_PAGE(Material.PAPER, "&e&l<- Prev Page", null, false, false, null),
   BACK_MENU(Material.BARRIER, "&c&l<-- Back", null, false, false, null),
+  TOGGLE_TRAIL(Material.RED_STAINED_GLASS_PANE, "&e&lTrail Activated", null, false, false, null),
 
   ;
 
