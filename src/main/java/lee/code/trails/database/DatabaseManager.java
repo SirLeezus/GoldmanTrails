@@ -18,6 +18,7 @@ import java.util.UUID;
 
 public class DatabaseManager {
   private final Trails trails;
+  private final Object synchronizedThreadLock = new Object();
   private Dao<PlayerTable, UUID> playerDao;
   private ConnectionSource connectionSource;
 
@@ -65,33 +66,39 @@ public class DatabaseManager {
     }
   }
 
-  public synchronized void createPlayerTable(PlayerTable playerTable) {
-    Bukkit.getAsyncScheduler().runNow(trails, scheduledTask -> {
-      try {
-        playerDao.createIfNotExists(playerTable);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    });
+  public void createPlayerTable(PlayerTable playerTable) {
+    synchronized (synchronizedThreadLock) {
+      Bukkit.getAsyncScheduler().runNow(trails, scheduledTask -> {
+        try {
+          playerDao.createIfNotExists(playerTable);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      });
+    }
   }
 
-  public synchronized void updatePlayerTable(PlayerTable playerTable) {
-    Bukkit.getAsyncScheduler().runNow(trails, scheduledTask -> {
-      try {
-        playerDao.update(playerTable);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    });
+  public void updatePlayerTable(PlayerTable playerTable) {
+    synchronized (synchronizedThreadLock) {
+      Bukkit.getAsyncScheduler().runNow(trails, scheduledTask -> {
+        try {
+          playerDao.update(playerTable);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      });
+    }
   }
 
-  public synchronized void deletePlayerTable(PlayerTable playerTable) {
-    Bukkit.getAsyncScheduler().runNow(trails, scheduledTask -> {
-      try {
-        playerDao.delete(playerTable);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    });
+  public void deletePlayerTable(PlayerTable playerTable) {
+    synchronized (synchronizedThreadLock) {
+      Bukkit.getAsyncScheduler().runNow(trails, scheduledTask -> {
+        try {
+          playerDao.delete(playerTable);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      });
+    }
   }
 }

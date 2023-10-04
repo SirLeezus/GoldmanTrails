@@ -11,12 +11,11 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CachePlayers extends DatabaseHandler {
+  private final ConcurrentHashMap<UUID, PlayerTable> playersCache = new ConcurrentHashMap<>();
 
   public CachePlayers(DatabaseManager databaseManager) {
     super(databaseManager);
   }
-
-  private final ConcurrentHashMap<UUID, PlayerTable> playersCache = new ConcurrentHashMap<>();
 
   public PlayerTable getPlayerTable(UUID uuid) {
     return playersCache.get(uuid);
