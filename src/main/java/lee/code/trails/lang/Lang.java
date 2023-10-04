@@ -26,7 +26,7 @@ public enum Lang {
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
   ERROR_PREVIOUS_PAGE("&7You are already on the first page."),
   ERROR_NEXT_PAGE("&7You are on the last page."),
-  ERROR_NO_TRAIL_DATA("&7You have never selected a trail before so it can't be toggled."),
+  ERROR_NO_TRAIL_DATA("&cYou have never selected a trail before so it can't be toggled."),
 
   ;
   @Getter private final String string;
