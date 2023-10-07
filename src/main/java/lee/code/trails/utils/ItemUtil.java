@@ -31,7 +31,7 @@ public class ItemUtil {
   public static void applyHeadSkin(ItemMeta itemMeta, String base64) {
     try {
       final SkullMeta skullMeta = (SkullMeta) itemMeta;
-      final GameProfile profile = new GameProfile(UUID.fromString("ffffffff-ffff-ffff-ffff-ffffffffffff"), null);
+      final GameProfile profile = new GameProfile(UUID.fromString("ffffffff-ffff-ffff-ffff-ffffffffffff"), "null");
       profile.getProperties().put("textures", new Property("textures", base64));
       if (skullMeta != null) {
         final Method mtd = skullMeta.getClass().getDeclaredMethod("setProfile", GameProfile.class);
