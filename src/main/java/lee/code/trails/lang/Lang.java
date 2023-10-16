@@ -8,6 +8,12 @@ import net.kyori.adventure.text.Component;
 @AllArgsConstructor
 public enum Lang {
   PREFIX("&#DF01DF&lTrails &6➔ "),
+  COMMAND_HELP_TITLE("&a----------------- &7[ &#DF01DF&lTrails Help &7] &a-----------------"),
+  COMMAND_HELP_LINE_1("&eTrails are for premium rank players only. Trails will spawn"),
+  COMMAND_HELP_LINE_2("&eparticles around the player when running or idle. You"),
+  COMMAND_HELP_LINE_3("&ecan select your trail and trail style from the &3/trails"),
+  COMMAND_HELP_LINE_4("&ecommand."),
+  COMMAND_HELP_FOOTER("&a-------------------------------------------------"),
   ON("&2&lON"),
   OFF("&c&lOFF"),
   MENU_PARTICLE_TITLE("&#DF01DF&lTrail Particles"),
