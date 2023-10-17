@@ -1,13 +1,10 @@
 package lee.code.trails.menus.menu.menudata;
 
 import lee.code.trails.lang.Lang;
-import lee.code.trails.trails.data.TrailParticle;
-import lee.code.trails.utils.CoreUtil;
 import lee.code.trails.utils.ItemUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 @AllArgsConstructor
